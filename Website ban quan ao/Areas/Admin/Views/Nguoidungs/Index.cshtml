@@ -1,0 +1,182 @@
+﻿@model PagedList.IPagedList<Website_ban_quan_ao.Models.Nguoidung>
+
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@{
+    var pageNumber = Model.PageNumber;
+    var pageSize = Model.PageSize;
+    var startIndex = (pageNumber - 1) * pageSize + 1;
+}
+
+<h2>Quản lý người dùng</h2>
+
+<!-- Tìm kiếm -->
+<div class="search-container">
+    <input id="searchInput" class="form-control search-input" type="text" placeholder="Tìm kiếm..." aria-label="Tìm kiếm" />
+</div>
+
+<!-- Nút thêm người dùng -->
+<div class="add-button-container">
+    <a href="/Admin/Nguoidungs/Create" class="btn btn-primary add-button">Thêm</a>
+</div>
+
+<!-- Bảng người dùng -->
+<div class="table-container">
+    <table class="table table-hover table-bordered user-table">
+        <thead>
+            <tr>
+                <th>STT</th>
+                <th>Họ tên</th>
+                <th>Email</th>
+                <th>Điện thoại</th>
+                <th>Mật khẩu</th>
+                <th>Địa chỉ</th>
+                <th>Phân quyền</th>
+                <th>Hành động</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                var i = startIndex;
+            }
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@i</td>
+                    <td>@Html.DisplayFor(modelItem => item.Hoten)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Dienthoai)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Matkhau)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Diachi)</td>
+                    <td>
+                        @{
+                            var phanquyens = ViewBag.PhanQuyenList as List<Website_ban_quan_ao.Models.Phanquyen>;
+                            var phanquyen = phanquyens.FirstOrDefault(pq => pq.IDQuyen == item.IDQuyen);
+                            if (phanquyen != null)
+                            {
+                                @phanquyen.TenQuyen
+                            }
+                        }
+                    </td>
+                    <td>
+                        <a href="@Url.Action("Edit", new { id = item.Manguoidung })" class="btn btn-sm btn-outline-warning">Sửa</a>
+                        <a href="@Url.Action("Delete", new { id = item.Manguoidung })" class="btn btn-sm btn-outline-danger">Xoá</a>
+                        <a href="@Url.Action("Details", new { id = item.Manguoidung })" class="btn btn-sm btn-outline-success">Chi tiết</a>
+                    </td>
+                </tr>
+                i++;
+            }
+        </tbody>
+    </table>
+</div>
+
+<!-- Phân trang -->
+<div class="pagination-container">
+    Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+</div>
+
+<!-- JavaScript tìm kiếm -->
+<script>
+    document.getElementById("searchInput").addEventListener("input", function () {
+        var searchValue = this.value.trim().toLowerCase();
+        var rowsToFilter = document.querySelectorAll("table.user-table tbody tr");
+
+        rowsToFilter.forEach(function (row) {
+            var cells = row.querySelectorAll("td");
+            var matchFound = false;
+
+            cells.forEach(function (cell) {
+                var textContent = cell.textContent.trim().toLowerCase();
+                if (textContent.includes(searchValue)) {
+                    matchFound = true;
+                }
+            });
+            if (matchFound) {
+                row.style.display = "";
+            } else {
+                row.style.display = "none";
+            }
+        });
+    });
+</script>
+
+<!-- CSS -->
+<style>
+    .search-container {
+        margin-bottom: 20px;
+        border-bottom: 2px solid #ddd;
+        padding-bottom: 10px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .search-input {
+        width: 200px;
+        height: 30px;
+        font-size: 14px;
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    .add-button-container {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 20px;
+    }
+
+    .add-button {
+        padding: 10px 20px;
+        border: 1px solid #007bff;
+        border-radius: 4px;
+        background-color: #007bff;
+        color: #fff;
+        text-align: center;
+        text-decoration: none;
+    }
+
+        .add-button:hover {
+            background-color: #0056b3;
+        }
+
+    .table-container {
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        padding: 10px;
+        background-color: #fff;
+    }
+
+    .user-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+        .user-table th, .user-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        .user-table th {
+            background-color: #f4f4f4;
+        }
+
+    .pagination-container {
+        text-align: center;
+        margin: 20px 0;
+    }
+
+    /* Đảm bảo mô tả tự động xuống dòng */
+    .description-cell {
+        max-width: 250px;
+        word-wrap: break-word;
+        letter-spacing: 0.5px;
+        padding: 5px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+    }
+</style>

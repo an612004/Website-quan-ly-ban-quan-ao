@@ -1,0 +1,337 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giao diện chính sách và sản phẩm</title>
+    <style>
+        /* Style cho phần chính sách */
+        .pd-top-30 {
+            padding-top: 30px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .policies-body {
+            display: flex;
+            justify-content: space-between;
+            text-align: center;
+        }
+
+        .policies-item {
+            width: 23%;
+        }
+
+        .policies-image img {
+            margin-bottom: 10px;
+        }
+
+        .policies-title {
+            font-weight: bold;
+        }
+
+        .policies-desc {
+            font-size: 14px;
+        }
+
+        /* Style cho phần sản phẩm */
+        .collection_slidershow {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .ss_item {
+            width: 23%;
+            text-align: center;
+        }
+
+        .ss_img img {
+            width: 100%;
+            border-radius: 10px;
+            object-fit: cover; /* Đảm bảo ảnh không bị méo */
+        }
+
+        /* Style cho phần slideshow */
+        .slideshow-container {
+            max-width: 1200px;
+            position: relative;
+            margin: 0 auto;
+            overflow: hidden; /* Ẩn ảnh vượt ra ngoài khung */
+        }
+
+        .slideshow-wrapper {
+            display: flex;
+            width: 300%; /* Nếu có 3 ảnh, width cần bằng 3 lần width của slideshow-container */
+            transition: transform 1s ease; /* Hiệu ứng chuyển động mượt mà */
+        }
+
+        .slide {
+            flex: 1 0 100%; /* Mỗi ảnh chiếm toàn bộ khung */
+            box-sizing: border-box;
+        }
+
+            .slide img {
+                width: 35%;
+                height: 400px; /* Thay đổi kích thước theo ý muốn */
+                object-fit: cover; /* Đảm bảo ảnh không bị méo */
+                border-radius: 10px;
+            }
+    </style>
+</head>
+<body>
+
+    <!-- Phần slideshow -->
+    <div class="slideshow-container">
+        <div class="slideshow-wrapper">
+            <div class="slide">
+                <img src="https://file.hstatic.net/1000360022/file/banner_web-_ra_mat__desk__81501a2b5021478b8d47a9b3fe8d69cc.jpg" alt="Male Model Fashion">
+            </div>
+            <div class="slide">
+                <img src="~/Hinhanh/dung-luong-banner-thoi-trang.jpg" alt="Marvel 1">
+            </div>
+            <div class="slide">
+                <img src="~/Hinhanh//ảnh chuyển 12.png" alt="Shirts Dress Fashion">
+            </div>
+            <div class="slide">
+                <img src="~/Hinhanh/ảnh chuyển 13.jpeg" alt="Shirts Dress Fashion">
+            </div>
+            <div class="slide">
+                <img src="~/Hinhanh/ảnh chuyển 14.jpg" alt="Shirts Dress Fashion">
+            </div>
+            <div class="slide">
+                <img src="~/Hinhanh/ảnh chuyển 15.png" alt="Shirts Dress Fashion">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentIndex = 0;
+        const slides = document.querySelectorAll('.slide');
+        const slideshowWrapper = document.querySelector('.slideshow-wrapper');
+        const interval = 3000; // Thay đổi ảnh mỗi 3 giây
+
+        function showNextSlide() {
+            currentIndex = (currentIndex + 1) % slides.length;
+            slideshowWrapper.style.transform = `translateX(-${100 * currentIndex}%)`;
+        }
+
+        setInterval(showNextSlide, interval);
+    </script>
+
+</body>
+</html>
+
+
+<!-- Section Chính sách -->
+<div class="ega-policies pd-top-30">
+    <div class="container">
+        <div class="policies-body">
+            <div class="policies-item">
+                <div class="policies-image">
+                    <img src="https://file.hstatic.net/1000360022/file/giaohangnhanh_abaa5d524e464a0c8547a91ad9b50968.png" alt="policies_icon_1" width="40" height="40" class="img-fluid" loading="lazy">
+                </div>
+                <div class="policies-info">
+                    <p class="policies-title">Miễn phí vận chuyển</p>
+                    <div class="policies-desc">Mọi đơn hàng từ 399K</div>
+                </div>
+            </div>
+
+            <div class="policies-item">
+                <div class="policies-image">
+                    <img src="https://file.hstatic.net/1000360022/file/giaohang_2943ae148bf64680bf20c3d881c898c9.png" alt="policies_icon_2" width="40" height="40" class="img-fluid" loading="lazy">
+                </div>
+                <div class="policies-info">
+                    <p class="policies-title">Đổi hàng tận nhà</p>
+                    <div class="policies-desc">Trong vòng 14 ngày</div>
+                </div>
+            </div>
+
+            <div class="policies-item">
+                <div class="policies-image">
+                    <img src="https://file.hstatic.net/1000360022/file/cod_5631433f0ad24c949e44e512b8535c43.png" alt="policies_icon_3" width="40" height="40" class="img-fluid" loading="lazy">
+                </div>
+                <div class="policies-info">
+                    <p class="policies-title">Thanh toán COD</p>
+                    <div class="policies-desc">Yên tâm mua sắm</div>
+                </div>
+            </div>
+
+            <div class="policies-item">
+                <div class="policies-image">
+                    <img src="https://file.hstatic.net/1000360022/file/cod_5631433f0ad24c949e44e512b8535c43.png" alt="policies_icon_4" width="40" height="40" class="img-fluid" loading="lazy">
+                </div>
+                <div class="policies-info">
+                    <p class="policies-title">Hotline: 028.73066.060</p>
+                    <div class="policies-desc">Hỗ trợ bạn từ 8h30-24h00</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Section Sản phẩm -->
+<section class="pd-top-30" data-include="section-bst-home">
+    <div class="container">
+        <div class="ss_body">
+            <div class="collection_slidershow">
+                <div class="ss_item">
+                    <a href="/collections/techurban-jeans-icon105-lightweight">
+                        <div class="ss_img">
+                            <img src="https://file.hstatic.net/1000360022/file/techopen_jeans_7e32840e2aba41ecb0cd8772d8eff9ee_grande.jpg" alt="TechUrban Jeans">
+                        </div>
+                    </a>
+                </div>
+                <div class="ss_item">
+                    <a href="/collections/quan-jean">
+                        <div class="ss_img">
+                            <img src="https://file.hstatic.net/1000360022/file/sp_denim_779deb4755ad4251bc8ecbbca8004673_grande.jpg" alt="Sản phẩm Denim">
+                        </div>
+                    </a>
+                </div>
+                <div class="ss_item">
+                    <a href="/collections/do-mac-hang-ngay">
+                        <div class="ss_img">
+                            <img src="https://file.hstatic.net/1000360022/file/dohangngay_69ac0ead5c7c4b4483520cec6804996a_grande.jpg" alt="Đồ mặc hàng ngày">
+                        </div>
+                    </a>
+                </div>
+                <div class="ss_item">
+                    <a href="/collections/do-di-lam">
+                        <div class="ss_img">
+                            <img src="https://file.hstatic.net/1000360022/file/dodilam_5e4f45bc5c8645deb71eea2b8dec4f99_grande.jpg" alt="Đồ đi làm">
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sản Phẩm Nổi Bật</title>
+    <style>
+        .spnoibat {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+            .spnoibat h3 {
+                font-size: 40px; /* Tăng kích thước */
+                color: #ff6600; /* Đổi màu sắc */
+                font-family: 'Arial', sans-serif;
+                margin-bottom: 35px;
+                text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Bóng đổ */
+                transition: color 0.3s ease; /* Hiệu ứng chuyển đổi màu */
+            }
+
+                .spnoibat h3:hover {
+                    color: #ff3300; /* Màu khi di chuột */
+                }
+
+        .slider-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+        }
+
+        .image-slider {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            width: calc(700px * 5); /* Tổng chiều rộng của slider dựa trên số lượng ảnh và kích thước mỗi ảnh */
+        }
+
+            .image-slider img {
+                width: 600px; /* Đặt kích thước chiều rộng cho mỗi ảnh */
+                height: auto;
+                max-width: 100%;
+                flex: 0 0 auto; /* Mỗi ảnh sẽ có chiều rộng cố định */
+                margin-right: 10px; /* Khoảng cách giữa các ảnh */
+            }
+
+        .arrow {
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1;
+        }
+
+        .prev {
+            left: 0;
+        }
+
+        .next {
+            right: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="spnoibat">
+        <h3>SẢN PHẨM NỔI BẬT</h3>
+        <div class="slider-container">
+            <button class="arrow prev" onclick="slideLeft()">&#10094;</button>
+            <div class="image-slider">
+                <img src="~/Hinhanh/ảnh chuyển 1.jpg" class="img-responsive" alt="Ảnh 1" />
+                <img src="~/Hinhanh/ảnh chuyển 1.jpg" class="img-responsive" alt="Ảnh 2" />
+                <img src="~/Hinhanh/ảnh chuyển 1.jpg" class="img-responsive" alt="Ảnh 3" />
+                <img src="~/Hinhanh/ảnh chuyển 1.jpg" class="img-responsive" alt="Ảnh 4" />
+                <img src="~/Hinhanh/ảnh chuyển 1.jpg" class="img-responsive" alt="Ảnh 5" />
+            </div>
+            <button class="arrow next" onclick="slideRight()">&#10095;</button>
+        </div>
+    </div>
+
+    <script>
+        let slider = document.querySelector('.image-slider');
+        let imageCount = slider.children.length;
+        let currentIndex = 0;
+
+        // Cập nhật vị trí slider
+        function updateSlider() {
+            const imageWidth = 700 + 10; // Chiều rộng của mỗi ảnh cộng với khoảng cách giữa ảnh
+            slider.style.transform = `translateX(-${currentIndex * imageWidth}px)`;
+        }
+
+        function slideLeft() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateSlider();
+            }
+        }
+
+        function slideRight() {
+            if (currentIndex < imageCount - 1) {
+                currentIndex++;
+                updateSlider();
+            }
+        }
+
+        // Khởi tạo slider khi trang tải xong
+        updateSlider();
+    </script>
+</body>
+</html>
+
+<style>
+    .spuachuong {
+        text-align: center;
+        margin-top: 20px;
+        color: #ff3300;
+    }
+</style>
+<h2 class="spuachuong">SẢN PHẨM ƯU CHUỘN </h2>

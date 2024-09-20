@@ -1,0 +1,207 @@
+﻿@model PagedList.IPagedList<Website_ban_quan_ao.Models.Sanpham>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@{
+    var pageNumber = Model.PageNumber;
+    var pageSize = Model.PageSize;
+    var startIndex = (pageNumber - 1) * pageSize + 1;
+}
+
+<h2>Quản lý sản phẩm</h2>
+
+<!-- Tìm kiếm -->
+<div class="search-container">
+    <input id="searchInput" type="text" placeholder="Tìm kiếm..." aria-label="Tìm kiếm" class="search-input" />
+    <input id="minPrice" type="number" placeholder="Giá thấp nhất" aria-label="Giá thấp nhất" class="search-input" />
+    <input id="maxPrice" type="number" placeholder="Giá cao nhất" aria-label="Giá cao nhất" class="search-input" />
+    <button id="searchButton" class="search-button">Tìm kiếm</button>
+</div>
+
+<!-- Nút thêm sản phẩm -->
+<div class="add-button-container">
+    <a href="/Admin/Home/Create" class="btn btn-primary add-button">Thêm Sản Phẩm</a>
+</div>
+
+<!-- Bảng sản phẩm -->
+<div class="table-container">
+    <table class="table table-hover table-bordered product-table">
+        <thead>
+            <tr>
+                <th>STT</th>
+                <th>Tên sản phẩm</th>
+                <th>Giá tiền</th>
+                <th>Giá sale</th>
+                <th>Sale</th>
+                <th>Số lượng</th>
+                <th>Mô tả</th>
+                <th>Kích cỡ</th>
+                <th>Màu sắc</th>
+                <th>Ảnh bìa</th>
+                <th>Tên hãng</th>
+                <th>Kiểu dáng</th>
+                <th>Hành động</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                var i = startIndex;
+            }
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@i</td>
+                    <td>@Html.DisplayFor(modelItem => item.Tensp)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Giatien)</td>
+                    <td>@Html.DisplayFor(modelItem => item.GiaSale)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Sale)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Soluong)</td>
+                    <td class="description-cell">@Html.DisplayFor(modelItem => item.Mota)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Kichco)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Mausac)</td>
+                    <td>
+                        <img src="@Url.Content("~/Hinhanh/" + item.Anhbia)" class="product-image" />
+                    </td>
+                    <td>@Html.DisplayFor(modelItem => item.Hangsanxuat.Tenhang)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Kieudang.Tenkieudang)</td>
+                    <td>
+                        <a href="@Url.Action("Edit", new { id = item.Masp })" class="btn btn-sm btn-outline-warning">Sửa</a>
+                        <a href="@Url.Action("Delete", new { id = item.Masp })" class="btn btn-sm btn-outline-danger">Xoá</a>
+                        <a href="@Url.Action("Details", new { id = item.Masp })" class="btn btn-sm btn-outline-success">Chi tiết</a>
+                    </td>
+                </tr>
+                i++;
+            }
+        </tbody>
+    </table>
+</div>
+
+<!-- Phân trang -->
+<div class="pagination-container">
+    Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+</div>
+
+<!-- JavaScript tìm kiếm -->
+<script>
+    function search() {
+        var searchQuery = document.getElementById("searchInput").value;
+        var minPrice = document.getElementById("minPrice").value;
+        var maxPrice = document.getElementById("maxPrice").value;
+
+        var url = '@Url.Action("Index")' + '?searchQuery=' + encodeURIComponent(searchQuery) + '&minPrice=' + encodeURIComponent(minPrice) + '&maxPrice=' + encodeURIComponent(maxPrice);
+
+        window.location.href = url;
+    }
+
+    document.getElementById('searchButton').addEventListener('click', function () {
+        search();
+    });
+
+    document.addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') {
+            search();
+        }
+    });
+</script>
+
+<!-- CSS -->
+<style>
+    .search-container {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+        border-bottom: 2px solid #ddd;
+        padding-bottom: 10px;
+    }
+
+    .search-input {
+        width: 200px;
+        height: 30px;
+        font-size: 14px;
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    .search-button {
+        width: 100px;
+        height: 30px;
+        font-size: 14px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+        .search-button:hover {
+            background-color: #0056b3;
+        }
+
+    .add-button-container {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 20px;
+    }
+
+    .add-button {
+        display: block;
+        padding: 10px 20px;
+        border: 1px solid #007bff;
+        border-radius: 4px;
+        background-color: #7242f5;
+        color: #fff;
+        text-align: center;
+        text-decoration: none;
+    }
+
+        .add-button:hover {
+            background-color: #0056b3;
+        }
+
+    .table-container {
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        padding: 10px;
+        background-color: #fff;
+    }
+
+    .product-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+        .product-table th, .product-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        .product-table th {
+            background-color: #f4f4f4;
+        }
+
+    .product-image {
+        width: 50px;
+        height: 50px;
+        object-fit: cover;
+    }
+
+    .pagination-container {
+        text-align: center;
+        margin: 20px 0;
+    }
+
+    .description-cell {
+        max-width: 250px;
+        word-wrap: break-word;
+        letter-spacing: 0.5px;
+        padding: 5px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+    }
+</style>

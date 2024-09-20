@@ -1,0 +1,434 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link rel="stylesheet" href="~/Content/bootstrap.min.css" />
+    <link rel=" stylesheet" href="~/Content/Style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <style>
+        /* Cố định thanh điều hướng ở đầu trang */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background-color: #dfeaeb;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Cung cấp khoảng cách cho phần nội dung dưới thanh điều hướng */
+        body {
+            padding-top: 100px; /* điều chỉnh kích thước thanh layout */
+            background-color: #ecf0f1;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Thanh điều hướng */
+        /* Điều chỉnh khoảng cách và kích thước chữ */
+        .nav-link {
+            color: #090a0a;
+            padding: 15px 20px; /* Tăng padding */
+            font-size: 16px; /* Tăng kích thước chữ */
+            transition: color 0.3s ease, background-color 0.3s ease;
+        }
+
+        /* Canh giữa các mục */
+        .navbar-nav {
+            justify-content: space-between; /* Cân bằng các mục */
+            align-items: center;
+        }
+
+        /* Điều chỉnh dropdown */
+        .dropdown-menu {
+            background-color: #34495e;
+            font-size: 16px; /* Tăng kích thước chữ */
+            border-radius: 4px; /* Tạo góc bo mềm */
+        }
+
+        /* Tăng sự tương phản và hiệu ứng hover */
+        .nav-link:hover {
+            background-color: #1abc9c;
+            color: white;
+            transition: all 0.3s ease-in-out; /* Hiệu ứng hover mượt hơn */
+        }
+
+        .dropdown-item {
+            color: #ecf0f1;
+            padding: 10px 20px;
+        }
+
+            .dropdown-item:hover {
+                background-color: #1abc9c;
+            }
+
+        /* Căn chỉnh icon */
+        .navbar-icons .nav-link {
+            font-size: 20px;
+            color: Black;
+            margin-left: 15px;
+        }
+
+        /* Căn chỉnh số lượng giỏ hàng */
+        .cart-icon {
+            position: relative;
+        }
+
+            .cart-icon .item-count {
+                position: absolute;
+                top: -10px;
+                right: -10px;
+                background-color: red;
+                color: white;
+                border-radius: 50%;
+                width: 20px;
+                height: 20px;
+                text-align: center;
+                line-height: 20px;
+                font-size: 20px;
+                margin-left: 20px;
+            }
+
+        /* Hiển thị dropdown khi di chuột */
+        .navbar-nav .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+
+        /* Hiệu ứng và style nổi bật cho AnAn Shop */
+        .navbar-brand {
+            font-size: 32px; /* Tăng kích thước chữ */
+            color: #ed093b; /* Màu  nổi bật */
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px; /* Khoảng cách giữa các chữ cái */
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Đổ bóng chữ */
+            transition: color 0.3s ease, transform 0.3s ease; /* Thêm hiệu ứng khi di chuột */
+        }
+
+            .navbar-brand:hover {
+                color: #e67e22; /* Đổi màu khi hover */
+                transform: scale(1.1); /* Phóng to khi hover */
+            }
+    </style>
+    <!-- Thêm Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark">
+        <div class="container">
+            @Html.ActionLink("AnbiShop.VN", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
+                <ul class="navbar-nav flex-grow-1">
+                    <li>@Html.ActionLink("Trang Chủ", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+
+                    <!-- Mục Áo Khoác -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Áo
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li>@Html.ActionLink("Áo Khoác Nỉ", "AoKhoacNi", "Sanpham", new { area = "" }, new { @class = "dropdown-item" })</li>
+                            <li>@Html.ActionLink("Áo Khoác Dù", "AoKhoacDu", "Sanpham", new { area = "" }, new { @class = "dropdown-item" })</li>
+                            @*<li>@Html.ActionLink("Áo Khoác Kaki", "AoKhoacKaki", "Sanpham", new { area = "" }, new { @class = "dropdown-item" })</li>*@
+                            @*<li>@Html.ActionLink("Áo Blazer Nam", "BlazerNam", "Sanpham", new { area = "" }, new { @class = "dropdown-item" })</li>*@
+                            <li>@Html.ActionLink("Áo Thun Tay Ngắn", "AoThunTayNgan", "Sanpham", new { area = "" }, new { @class = "dropdown-item" })</li>
+                            <li>@Html.ActionLink("Áo Thun Tay Dài", "AoThunTayDai", "Sanpham", new { area = "" }, new { @class = "dropdown-item" })</li>
+                            <li>@Html.ActionLink("Áo Thun Polo", "AoThunPolo", "Sanpham", new { area = "" }, new { @class = "dropdown-item" })</li>
+                            <li>@Html.ActionLink("Áo Sơ Mi Tay Ngắn", "AoSoMiTayNgan", "Sanpham", new { area = "" }, new { @class = "dropdown-item" })</li>
+                            <li>@Html.ActionLink("Áo Sơ Mi Tay Dài", "AoSoMiTayDai", "Sanpham", new { area = "" }, new { @class = "dropdown-item" })</li>
+                        </ul>
+                    </li>
+
+
+                    <!-- Mục Quần dài -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown4" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Quần
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown4">
+                            <li>@Html.ActionLink("Quần Kaki", "QuanKaki", "Sanpham", new { area = "" }, new { @class = "dropdown-item" })</li>
+                            <li>@Html.ActionLink("Quần Tây", "QuanTay", "Sanpham", new { area = "" }, new { @class = "dropdown-item" })</li>
+                            <li>@Html.ActionLink("Quần Jean", "QuanJean", "Sanpham", new { area = "" }, new { @class = "dropdown-item" })</li>
+                            <li>@Html.ActionLink("Quần Short Kaki", "QuanShortKaki", "Sanpham", new { area = "" }, new { @class = "dropdown-item" })</li>
+                            @*<li>@Html.ActionLink("Quần Short Thun", "QuanShortThun", "Sanpham", new { area = "" }, new { @class = "dropdown-item" })</li>
+                            <li>@Html.ActionLink("Quần Short Dù", "QuanShortDu", "Sanpham", new { area = "" }, new { @class = "dropdown-item" })</li>*@
+                        </ul>
+                    </li>
+
+
+                    <!-- Mục phụ kiện -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown6" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Phụ kiện
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown6">
+                            <li>@Html.ActionLink("Ví Da", "ViDa", "Sanpham", new { area = "" }, new { @class = "dropdown-item" })</li>
+                            <li>@Html.ActionLink("Nón", "Non", "Sanpham", new { area = "" }, new { @class = "dropdown-item" })</li>
+                            <li>@Html.ActionLink("Dây Nịt", "DayNit", "Sanpham", new { area = "" }, new { @class = "dropdown-item" })</li>
+                        </ul>
+                    </li>
+                    <li>@Html.ActionLink("Tin Tức", "Index", "TinTuc", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Giới Thiệu", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Liên hệ", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Tất cả sản phẩm", "Index", "Sanpham", new { area = "" }, new { @class = "nav-link" })</li>
+                </ul>
+                @{
+                    var u = Session["use"] as Website_ban_quan_ao.Models.Nguoidung;
+                }
+
+                <!-- Thêm icon vào góc phải -->
+                <ul class="navbar-nav navbar-icons">
+                    @{
+                        if (u != null)
+                        {
+
+                            <span>Xin chào:@u.Email;</span>
+                            @*@Html.ActionLink("ĐĂNG XUẤT", "DangXuat", "User", new { style = "color:red" }) *@
+                            <a style="color:red" href="/User/DangXuat">ĐĂNG XUẤT</a>
+                            <a style="color:black" href="/User/Thongtin">Quản lý thông tin</a>
+                        }
+                        else
+                        {
+                            <a style="color: #3238a8" href="/User/Dangky"> Đăng ký</a>
+                            <span>&nbsp;</span>
+                            <a style="color: #3238a8" href="/User/Dangnhap"> Đăng nhập</a>
+                        }
+                    }
+                    @*<li class="nav-item">
+                            <a class="nav-link" href="#"><i class="fas fa-search"></i></a>
+                        </li>*@
+                    <li class="nav-item cart-icon">
+                        <a class="nav-link" href="#"><i class="fas fa-shopping-cart"></i></a>
+                        <span class="item-count" id="cartItemCount">0</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</body>
+</html>
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@RenderSection("scripts", required: false)
+
+@RenderBody()
+<hr />
+<footer class="main-footer mainfooter-toolbar">
+    <div class="main-footer--bottom">
+        <div class="container">
+            <div class="row">
+                <!-- Cột 1: AnAn Shop -->
+                <div class="col-xs-12 col-sm-6 col-md-3 col-lg">
+                    <div class="footer-col footer-block">
+                        <h4 class="footer-title">AnBiShop</h4>
+                        <div class="footer-content toggle-footer">
+                            <ul>
+                                <li class="item"><a href="/pages/about-us" title="Giới thiệu">Giới thiệu</a></li>
+                                <li class="item"><a href="https://onapp.haravan.com/orderstrackingphone/shop/kenta" target="_blank" title="Kiểm tra đơn hàng">Kiểm tra đơn hàng</a></li>
+                                <li class="item"><a href="/pages/huong-dan-chon-size" title="Cách chọn size">Cách chọn size</a></li>
+                                <li class="item"><a href="/pages/lien-he" title="Thông tin liên hệ">Thông tin liên hệ</a></li>
+                                <li class="item"><a href="/pages/cau-hoi-thuong-gap" title="Câu hỏi thường gặp">Câu hỏi thường gặp</a></li>
+                                <li class="item"><a href="/pages/huong-dan-bao-quan" title="Hướng dẫn bảo quản">Hướng dẫn bảo quản</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- Cột 2: Chính sách -->
+                <div class="col-xs-12 col-sm-6 col-md-3 col-lg">
+                    <div class="footer-col footer-link">
+                        <h4 class="footer-title">CHÍNH SÁCH</h4>
+                        <div class="footer-content toggle-footer">
+                            <ul>
+                                <li class="item"><a href="/pages/huong-dan-mua-hang" title="Hướng dẫn mua hàng">Hướng dẫn mua hàng</a></li>
+                                <li class="item"><a href="/pages/khach-hang-than-thiet" title="Khách hàng thân thiết">Khách hàng thân thiết</a></li>
+                                <li class="item"><a href="/pages/chinh-sach-doi-hang" title="Chính sách đổi hàng">Chính sách đổi hàng</a></li>
+                                <li class="item"><a href="/pages/chinh-sach-bao-mat" title="Chính sách bảo mật">Chính sách bảo mật</a></li>
+                                <li class="item"><a href="/pages/doi-tac-san-xuat" title="Đối tác sản xuất">Đối tác sản xuất</a></li>
+                                <li class="item"><a href="/pages/cong-tac-vien-kenta" title="Bán hàng liên kết (Affiliate)">Bán hàng liên kết (Affiliate)</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cột 3: Kết nối -->
+                <div class="col-xs-12 col-sm-6 col-md-3 col-lg">
+                    <div class="footer-col footer-block">
+                        <h4 class="footer-title">Kết nối với AnBiShop</h4>
+                        <div class="footer-content">
+                            <div class="social-list">
+                                <!-- Icon mạng xã hội -->
+                                <a href="https://www.facebook.com/kentavietnam" target="_blank">
+                                    <img src="~/Hinhanh/facebook.jpg" class="social-icon">
+                                </a>
+                                <a href="https://g.page/kentashop?share" target="_blank">
+                                    <img src="~/Hinhanh/google.png" class="social-icon">
+                                </a>
+                                <a href="https://www.instagram.com/kenta.vietnam/" target="_blank">
+                                    <img src="~/Hinhanh/instagram.jpg" class="social-icon">
+                                </a>
+                                <a href="https://www.tiktok.com/kenta.vn" target="_blank" style="background: transparent;">
+                                    <img src="//theme.hstatic.net/1000096703/1000836887/14/tiktok.png?v=310" class="social-icon">
+                                </a>
+                            </div>
+
+                            <div class="logo-footer">
+                                <a href="http://online.gov.vn/Home/WebDetails/3561">
+                                    <img src="https://file.hara.vn/1000114117/file/logo-bct_5a0bbf4fb2d34c3e88c04df41ad38dc9.png" alt="Bộ Công Thương" class="footer-logo">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cột 4: Thông tin cửa hàng -->
+                <div class="col-xs-12 col-sm-6 col-md-3 col-lg">
+                    <div class="footer-col footer-block">
+                        <h4 class="footer-title active">Thông tin cửa hàng</h4>
+                        <div class="footer-content toggle-footer" style="display: block;">
+                            <ul class="information">
+                                <li><img src="//theme.hstatic.net/1000096703/1000836887/14/buildings.png?v=310"><span></span> 20 Cửu Long, P15, Q.10, HCM</li>
+                                <li><img src="//theme.hstatic.net/1000096703/1000836887/14/buildings.png?v=310"><span></span> 168 Nguyễn Trọng Tuyển, P8, Phú Nhuận</li>
+                                <li><img src="//theme.hstatic.net/1000096703/1000836887/14/communications.png?v=310"><span>Hotline:</span> (028) 7300 6200 </li>
+                                <li><img src="//theme.hstatic.net/1000096703/1000836887/14/envelopes.png?v=310"><span>Mail:</span> kentasale@gmail.com</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="main-footer--copyright">
+        <div class="container">
+            <div class="main-footer--border">
+                <p>Copyright © 2024 <a href="https://kenta.vn"> AnbiShop.VN</a>.</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@RenderSection("scripts", required: false)
+</div>
+
+<!-- CSS cho phần footer -->
+<style>
+    .main-footer {
+        background-color: #ffffff; /* Màu nền trắng để nổi bật hơn */
+        color: #333;
+        padding: 40px 0;
+        font-family: 'Arial', sans-serif;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Thêm hiệu ứng bóng nhẹ */
+        border-top: 3px solid #007bff; /* Thêm đường viền trên để nổi bật */
+    }
+
+    .footer-title {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        color: #333;
+        border-bottom: 2px solid #e9ecef; /* Thêm đường viền dưới tiêu đề */
+        padding-bottom: 10px;
+    }
+
+    .footer-col {
+        margin-bottom: 20px;
+        border: 1px solid #dee2e6; /* Thêm đường viền cho các cột */
+        border-radius: 5px; /* Bo góc nhẹ cho đường viền */
+        padding: 15px;
+        background-color: #f9f9f9; /* Màu nền nhạt cho các cột để tạo sự phân biệt */
+    }
+
+    .footer-content ul {
+        list-style: none;
+        padding-left: 0;
+    }
+
+        .footer-content ul li {
+            margin-bottom: 10px;
+        }
+
+            .footer-content ul li a {
+                color: #007bff; /* Màu xanh hiện đại */
+                text-decoration: none;
+                transition: color 0.3s;
+            }
+
+                .footer-content ul li a:hover {
+                    color: #0056b3; /* Màu xanh đậm hơn khi hover */
+                }
+
+    .social-list {
+        display: flex;
+        gap: 15px;
+        justify-content: center;
+    }
+
+    .social-icon {
+        width: 40px;
+        height: 40px;
+        transition: transform 0.3s ease;
+    }
+
+        .social-icon:hover {
+            transform: scale(1.2);
+        }
+
+    .logo-footer {
+        margin-top: 30px;
+        text-align: center;
+    }
+
+    .footer-logo {
+        max-width: 180px;
+    }
+
+    .information li {
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+    }
+
+        .information li img {
+            margin-right: 10px;
+            width: 20px;
+            height: 20px;
+        }
+
+    .main-footer--copyright {
+        background-color: #f1f3f5; /* Màu nền nhạt hơn để tạo sự tương phản nhẹ */
+        padding: 20px 0;
+        text-align: center;
+        color: #6c757d;
+        border-top: 2px solid #dee2e6; /* Thêm đường viền trên cho copyright */
+    }
+
+    .main-footer--border {
+        border-top: 1px solid #dee2e6;
+        padding-top: 10px;
+    }
+
+        .main-footer--border a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+            .main-footer--border a:hover {
+                color: #0056b3;
+            }
+</style>

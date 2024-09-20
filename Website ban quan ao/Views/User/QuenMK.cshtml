@@ -1,0 +1,73 @@
+﻿
+@{
+    ViewBag.Title = "QuenMK";
+}
+
+<div class="col-md-6 col-xs-12 wrapbox-content-account">
+    <div id="customer-login">
+        <div id="login" class="userbox" style="display: none;">
+            <div class="accounttype">
+                <h2 class="title"></h2>
+            </div>
+            <form accept-charset="UTF-8" action="/account/login" id="customer_login" method="post">
+                <input name="form_type" type="hidden" value="customer_login">
+                <input name="utf8" type="hidden" value="✓">
+
+
+                <div class="clearfix large_form">
+                    <label for="customer_email" class="icon-field"><i class="icon-login icon-envelope "></i></label>
+                    <input required="" type="email" value="" name="customer[email]" id="customer_email" placeholder="Email" class="text">
+                </div>
+
+                <div class="clearfix large_form">
+                    <label for="customer_password" class="icon-field"><i class="icon-login icon-shield"></i></label>
+                    <input required="" type="password" value="" name="customer[password]" id="customer_password" placeholder="Mật khẩu" class="text" size="16">
+                </div>
+
+                <div class="clearfix action_account_custommer">
+                    <div class="action_bottom button dark">
+                        <input class="btn btn-signin" type="submit" value="Đăng nhập">
+                    </div>
+                    <div class="req_pass">
+                        <a href="#" onclick="showRecoverPasswordForm();return false;">Quên mật khẩu?</a><br>
+                        hoặc <a href="/account/register" title="Đăng ký">Đăng ký</a>
+                    </div>
+                </div>
+
+                <input id="d87d3048fd2c4d8cb2ba00f2c0cb401f" name="g-recaptcha-response" type="hidden" value="03AFcWeA4ZBz50siIyAnpeC-I5FHUwASmWV1vjyniOi0scsPfOZwhkueKJ6qhK-T1Fc81cUSw_qrv1EgWnQHkC4ZxEeRXmPc_anSCstseyO3rzyUKoLDLj7Y3DhfsBh0xCclFtKFtHZiswgSwihKVf1G3u7GdxwE1Rx8bNk7os1fsJbyS9ddwukvPgAwd3l8UWKu36TlglaLGq80Ks7SEkutA3kl6UQlOdJ3l8lwIkNjyE7SAeK5Rtn9fK0wv0JB0lh-n3GFLFZeFmrlwAVF7oLcoU5o89DZUJGhND9JvPZsuf4Duw9GSOZdppFEDkDpqSZf8oQOQ2rOqDw8t14dRj8_1wXdFqj7VV8Sl69sYclOEezORxLkzbXGy_jYtqOwT3Gwj4TQLK4SymmzAaISgNzJgIstjNfVHaB4R7-HSI87n6WTd1NxYVKuCu4nEEtMgx7V4qAOZSqpFuIfbHFh4hwtbf7Xz2qxgdJPRc46KaYaZNeBnrGO2YowJXeqR5r298mF0NWAvyZ5aJdkLF3VPtF_WGJsi9wfpwaNZrK8TpUq8C9xtolysv3TdCgYpCWpqlxFtTdB3sRcofxP_62l4eOnGEvCD6T1cpc6ySjdqkgCTI4tevSnlS9OOo14FSYSTZeBCPAKtwTfbENy14wD_EKVKgqxm_cvn3yKaDEMCAmiFsoK_4iA27hIZNWKv8TMfKkOOXAUoKe1C0k2E-tQKZ4N0wwSZ3jiQmJVJ7wKvNaA5mzZR122RTXmFZ4saLd5oxJVxx1dBGdkh3VgAHTH2Gdy5WWTnGfAzl9gbLEPTg880BSXwj1QDJreTQ-ynALexMcyx2OPyAzg9sFuraICuov670eaHyNfslDprmIfWOFfhZbtoOQ42w_jZc7ROzI2WsrVaVhDfTtPiD">
+                <script src="https://www.google.com/recaptcha/api.js?render=6LdD18MUAAAAAHqKl3Avv8W-tREL6LangePxQLM-"></script>
+                <script>grecaptcha.ready(function() {grecaptcha.execute('6LdD18MUAAAAAHqKl3Avv8W-tREL6LangePxQLM-', {action: 'submit'}).then(function(token) {document.getElementById('d87d3048fd2c4d8cb2ba00f2c0cb401f').value = token;});});</script>
+            </form>
+        </div>
+        <div id="recover-password" style="display: block;" class="userbox">
+            <div class="accounttype">
+                <h2>Phục hồi mật khẩu</h2>
+            </div>
+
+            <form accept-charset="UTF-8" action="/account/recover" method="post">
+                <input name="form_type" type="hidden" value="recover_customer_password">
+                <input name="utf8" type="hidden" value="✓">
+
+
+                <div class="clearfix large_form">
+                    <label for="email" class="icon-field"><i class="icon-login icon-envelope "></i></label>
+                    <input type="email" value="" size="30" name="email" placeholder="Email" id="recover-email" class="text">
+                </div>
+                <div class="clearfix action_account_custommer">
+                    <div class="action_bottom button dark">
+                        <input class="btn" type="submit" value="Gửi">
+                    </div>
+                    <div class="req_pass">
+                        <a href="#" onclick="hideRecoverPasswordForm();return false;">Hủy</a>
+                    </div>
+                </div>
+
+                <input id="3893cfa0b4654599a2543d37f3606e49" name="g-recaptcha-response" type="hidden" value="03AFcWeA5wFIw3K2ytidWKo_xitF_bxe9nkCxrwTRtFb_AzudRbFID0rjjPE2QapHH2C0tV99neMccYb7L_ztSiqTysDd108jCKn220a7XinNTAZOSYcSHl2rdr7xjcuqur--TLh77QYpbc0rkV7IkdX0x4MG51UYjXi5W2_7wtxxBmNhEOR2ZiK3U_u1CZwVLc8ClIngaykqOIRL2NjBc-mGdOD4Mo_h0JOPibICLk_Vj8xOWcF9Dq6HazKXQ_JSNwMI9EPF6mayakSr4sClzpku3vMKTExanmWlHVDt-taw7THwb146A6ZKKQ-tJDAHj2vDUI-DqAMvMmPmDjKdwvlaDPqYbjxLUP2rboHkg8eWwD_1Wn0NyPe4-6nG42m71Er1hSoSr67dhmn4v9akQi6bPWqf4cIHq88HMl_ii-NaxfDlQsOnOI90JZk7qgJp7618PhlTelBX1uNVVz2ufPyA_sHbFZqSVzVydbZfi9VmBS30HvFAlpqcEaZhS65uzXAvxFgId0MkvLyDV4aD4mfwx0HpafnsebrbIDgV698ms1voX9rreXu0vXiAPIVU4hLJ2V67DkgXOUS_kQLTmKqgF7L6xWRZV5OnmA5hvUM5GfbRaXoHRlt6V9tfI0Y8-l_hFpV69ZfRq9UZ38Tu-pEqT6a2nqol-w4C9SUrp3vTYWzj2xUB2AZpzVFKwjwBaZUoy0izwDDM9d6z5HxvfNmgv8mgI-hEy0-htTTSXDRRbSz-KDyNqQVtHBijqCL4BCClRqRAWjb1WBrczXcudkxiXKSk5ML3L10ndckkt91o5HPtaZHq-fXdmRlQvV65sf815G9QKEdhI3CBOYtowy6MxfIYBXlf_OHZWZjrkA4yiUyHqgkiBN8Vx6qIaCfG8bnew79MeCtvV">
+                <script src="https://www.google.com/recaptcha/api.js?render=6LdD18MUAAAAAHqKl3Avv8W-tREL6LangePxQLM-"></script>
+                <script>grecaptcha.ready(function() {grecaptcha.execute('6LdD18MUAAAAAHqKl3Avv8W-tREL6LangePxQLM-', {action: 'submit'}).then(function(token) {document.getElementById('3893cfa0b4654599a2543d37f3606e49').value = token;});});</script>
+            </form>
+        </div>
+
+    </div>
+</div>
+
