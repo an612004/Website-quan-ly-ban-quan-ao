@@ -112,12 +112,29 @@ namespace Website_ban_quan_ao.Controllers
             {
                 string userMail = userlog["userMail"];
                 string password = userlog["password"];
-                var f_password = GetMD5(password);
+                // Kiểm tra trường email và password không được để trống
+                if (string.IsNullOrEmpty(userMail))
+                {
+                    ModelState.AddModelError("userMail", "Email không được để trống.");
+                }
+                if (string.IsNullOrEmpty(password))
+                {
+                    ModelState.AddModelError("password", "Mật khẩu không được để trống.");
+                }
 
+                // Nếu các điều kiện không thỏa mãn
+                if (!ModelState.IsValid)
+                {
+                    return View(model);
+                }
+                //Mã hóa mật khẩu
+                var f_password = GetMD5(password);
+                //Kiểm tra thông tin đăng nhập
                 var islogin = db.Nguoidungs.SingleOrDefault(x => x.Email.Equals(userMail) && x.Matkhau.Equals(f_password));
                 if (islogin != null)
                 {
                     Session["use"] = islogin;
+                    //Kiểm tra nếu là admin
                     if (userMail == "admin@gmail.com" || userMail == "admin2@gmail.com")
                     {
                         return RedirectToAction("Index", "Admin/Home");
