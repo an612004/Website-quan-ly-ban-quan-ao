@@ -24,7 +24,7 @@ namespace Website_ban_quan_ao.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult dangky(Nguoidung nguoidung)
         {
-            // Kiểm tra họ tên: không được để trống, không được chứa số, và có độ dài tối thiểu 3 ký tự
+            // Kiểm tra họ tên: không được để trống, không được chứa số, không chứa ký tự đặc biệt, và có độ dài tối thiểu 3 ký tự
             if (string.IsNullOrEmpty(nguoidung.Hoten))
             {
                 ModelState.AddModelError("Hoten", "Họ tên không được để trống.");
@@ -36,6 +36,10 @@ namespace Website_ban_quan_ao.Controllers
             else if (nguoidung.Hoten.Length < 3)
             {
                 ModelState.AddModelError("Hoten", "Họ tên phải có độ dài tối thiểu 3 ký tự.");
+            }
+            else if (!System.Text.RegularExpressions.Regex.IsMatch(nguoidung.Hoten, @"^[a-zA-Z\s]+$"))
+            {
+                ModelState.AddModelError("Hoten", "Họ tên chỉ được chứa chữ cái và khoảng trắng, không bao gồm ký tự đặc biệt.");
             }
 
             // Kiểm tra email: không được để trống và phải đúng định dạng Gmail
