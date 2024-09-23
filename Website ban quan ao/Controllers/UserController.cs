@@ -71,6 +71,10 @@ namespace Website_ban_quan_ao.Controllers
             {
                 ModelState.AddModelError("Matkhau", "Mật khẩu phải có ít nhất 5 ký tự.");
             }
+            if (string.IsNullOrEmpty(nguoidung.Diachi))
+            {
+                ModelState.AddModelError("Diachi", "Địa chỉ không được bỏ trống");
+            }
 
             // Nếu tất cả các điều kiện đều thỏa mãn, lưu người dùng
             if (ModelState.IsValid)
