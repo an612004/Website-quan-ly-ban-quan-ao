@@ -1,105 +1,164 @@
 ﻿@model Website_ban_quan_ao.Models.Sanpham
+
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Xóa vĩnh viễn sản phẩm";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>Xoá vĩnh viễn sản phẩm</h2>
+<div class="delete-product-container">
+    <h2 class="title">Xóa vĩnh viễn sản phẩm</h2>
 
+    <div class="product-details">
+        <div class="product-image">
+            <td>
+                <img src="@Url.Content("~/Hinhanh/" + Model.Anhbia)" class="product-image" />
+            </td>
+            @*<img src="@Model.Anhbia" alt="Ảnh sản phẩm" class="img-fluid" />*@
+        </div>
 
-<div>
-    <h4>Sanpham</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Hangsanxuat.Tenhang)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Hangsanxuat.Tenhang)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Kieudang.Tenkieudang)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Kieudang.Tenkieudang)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Tensp)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Tensp)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Giatien)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Giatien)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Soluong)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Soluong)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Mota)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Mota)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Kichco)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Kichco)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Sanphammoi)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Sanphammoi)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Mausac)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Mausac)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Anhbia)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Anhbia)
-        </dd>
-
-    </dl>
+        <div class="product-info">
+            <table class="table table-striped">
+                <tbody>
+                    <tr>
+                        <th>Hãng sản xuất</th>
+                        <td>@Html.DisplayFor(model => model.Hangsanxuat.Tenhang)</td>
+                    </tr>
+                    <tr>
+                        <th>Kiểu dáng</th>
+                        <td>@Html.DisplayFor(model => model.Kieudang.Tenkieudang)</td>
+                    </tr>
+                    <tr>
+                        <th>Tên sản phẩm</th>
+                        <td>@Html.DisplayFor(model => model.Tensp)</td>
+                    </tr>
+                    <tr>
+                        <th>Giá tiền</th>
+                        <td>@Html.DisplayFor(model => model.Giatien) VND</td>
+                    </tr>
+                    <tr>
+                        <th>Số lượng</th>
+                        <td>@Html.DisplayFor(model => model.Soluong)</td>
+                    </tr>
+                    <tr>
+                        <th>Kích cỡ</th>
+                        <td>@Html.DisplayFor(model => model.Kichco)</td>
+                    </tr>
+                    <tr>
+                        <th>Màu sắc</th>
+                        <td>@Html.DisplayFor(model => model.Mausac)</td>
+                    </tr>
+                    <tr>
+                        <th>Sản phẩm mới</th>
+                        <td>@Html.DisplayFor(model => model.Sanphammoi)</td>
+                    </tr>
+                    <tr>
+                        <th>Mô tả</th>
+                        <td>@Html.DisplayFor(model => model.Mota)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-warning" /> |
-            @Html.ActionLink("Về trang chủ", "Index")
+        <div class="action-buttons">
+            <input type="submit" value="Xóa" class="btn btn-danger btn-custom" />
+            <a href="@Url.Action("Index")" class="btn btn-primary btn-custom">Về trang chủ</a>
         </div>
     }
 </div>
+
+<!-- CSS -->
+<style>
+    .delete-product-container {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f5f5f5;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .title {
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 28px;
+        color: #d9534f;
+        font-weight: bold;
+    }
+
+    .product-details {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+    }
+
+    .product-image {
+        flex: 1;
+        max-width: 40%;
+        text-align: center;
+    }
+
+        .product-image img {
+            max-width: 100%;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+
+    .product-info {
+        flex: 1;
+        padding-left: 20px;
+    }
+
+    .table {
+        width: 100%;
+    }
+
+        .table th {
+            text-align: left;
+            width: 150px;
+            background-color: #f9f9f9;
+            padding: 10px;
+            font-weight: bold;
+        }
+
+        .table td {
+            padding: 10px;
+        }
+
+    .action-buttons {
+        display: flex;
+        justify-content: flex-end;
+        gap: 15px;
+    }
+
+    .btn-custom {
+        padding: 10px 20px;
+        font-size: 16px;
+        font-weight: 500;
+        border-radius: 5px;
+    }
+
+    .btn-danger {
+        background-color: #d9534f;
+        border-color: #d43f3a;
+        color: white;
+    }
+
+        .btn-danger:hover {
+            background-color: #c9302c;
+        }
+
+    .btn-primary {
+        background-color: #0275d8;
+        border-color: #0275d8;
+        color: white;
+    }
+
+        .btn-primary:hover {
+            background-color: #025aa5;
+        }
+</style>

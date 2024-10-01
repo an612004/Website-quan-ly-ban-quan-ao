@@ -76,75 +76,75 @@ namespace Website_ban_quan_ao.Controllers
         //Các Hàm bên dưới là khai báo các loại sản phẩm của áo 
         public ActionResult AoKhoacNi()
         {
-            var AoKhoacNi = db.Sanphams.Where(n => n.Mahang == 1).Take(20).ToList();
+            var AoKhoacNi = db.Sanphams.Where(n => n.Makieudang == 1).Take(20).ToList();
             return PartialView(AoKhoacNi);
         }
         public ActionResult AoKhoacDu()
         {
-            var AokhoacDu = db.Sanphams.Where(n => n.Mahang == 2).Take(20).ToList();
+            var AokhoacDu = db.Sanphams.Where(n => n.Makieudang == 2).Take(20).ToList();
             return PartialView(AokhoacDu);
         }
         public ActionResult AoThunTayNgan()
         {
-            var AoThunTayNgan = db.Sanphams.Where(n=> n.Mahang == 3).Take(20).ToList();
+            var AoThunTayNgan = db.Sanphams.Where(n=> n.Makieudang == 3).Take(20).ToList();
             return PartialView(AoThunTayNgan);
         }
         public ActionResult AoThunTayDai()
         {
-            var AoThunTayDai = db.Sanphams.Where(n => n.Mahang== 4).Take(20).ToList();  
+            var AoThunTayDai = db.Sanphams.Where(n => n.Makieudang == 4).Take(20).ToList();  
             return PartialView(AoThunTayDai);
         }
         public ActionResult AoThunPoLo()
         {
-            var AoThunPoLo = db.Sanphams. Where(n => n.Mahang == 5).Take(20).ToList();
+            var AoThunPoLo = db.Sanphams. Where(n => n.Makieudang == 5).Take(20).ToList();
             return PartialView(AoThunPoLo);
         }
         public ActionResult AoSoMiTayNgan()
         {
-            var AoSoMiTayNgan = db .Sanphams.Where( n => n .Mahang == 6).Take(20).ToList();
+            var AoSoMiTayNgan = db .Sanphams.Where( n => n .Makieudang == 6).Take(20).ToList();
             return PartialView(AoSoMiTayNgan);
         }
         public ActionResult AoSoMiTayDai()
         {
-            var AoSoMiTayDai = db.Sanphams.Where(n => n.Mahang == 7).Take(20).ToList();
+            var AoSoMiTayDai = db.Sanphams.Where(n => n.Makieudang == 7).Take(20).ToList();
             return PartialView(AoSoMiTayDai);
         }
         //Các Hàm bên dưới là khai báo các loại sản phẩm của Quần
         public ActionResult QuanKaki()
         {
-            var QuanKaKi = db.Sanphams.Where(n => n.Mahang == 8).Take(20).ToList();
+            var QuanKaKi = db.Sanphams.Where(n => n.Makieudang == 8).Take(20).ToList();
             return PartialView(QuanKaKi);
         }
         public ActionResult QuanTay()
         {
-            var QuanTay = db.Sanphams.Where(n => n.Mahang == 9).Take(20).ToList();
+            var QuanTay = db.Sanphams.Where(n => n.Makieudang == 9).Take(20).ToList();
             return PartialView(QuanTay);
         }
         public ActionResult QuanJean()
         {
-            var QuanJean = db.Sanphams.Where(n => n.Mahang == 10).Take(20).ToList();    
+            var QuanJean = db.Sanphams.Where(n => n.Makieudang == 10).Take(20).ToList();    
             return PartialView(QuanJean);
         }
         public ActionResult QuanShortKaki()
         {
-            var QuanShortKaki = db.Sanphams.Where(n => n.Mahang == 11).Take(20).ToList();
+            var QuanShortKaki = db.Sanphams.Where(n => n.Makieudang == 11).Take(20).ToList();
             return PartialView(QuanShortKaki);
         }
         // Phụ kiện
         public ActionResult ViDa()
         {
-            var ViDa = db.Sanphams.Where(n => n.Mahang == 12).Take(20).ToList();
+            var ViDa = db.Sanphams.Where(n => n.Makieudang == 12).Take(20).ToList();
             return PartialView(ViDa);
 
         }
         public ActionResult Non()
         {
-            var Non = db.Sanphams.Where(n => n.Mahang == 13).Take(20).ToList();
+            var Non = db.Sanphams.Where(n => n.Makieudang == 13).Take(20).ToList();
             return PartialView(Non);
         }
         public ActionResult DayNit()
         {
-            var DayNit = db.Sanphams.Where(n => n.Mahang == 14).Take(20).ToList();
+            var DayNit = db.Sanphams.Where(n => n.Makieudang == 14).Take(20).ToList();
             return PartialView(DayNit);
         }
     }

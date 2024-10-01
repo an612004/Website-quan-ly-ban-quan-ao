@@ -1,99 +1,171 @@
 ﻿@model Website_ban_quan_ao.Models.Sanpham
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Thông tin chi tiết sản phẩm";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>Thông tin chi tiết</h2>
+<div class="product-details-container">
+    <h2 class="title">Thông tin chi tiết sản phẩm</h2>
 
-<div>
-    <h4>Sản phẩm</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Hangsanxuat.Tenhang)
-        </dt>
+    <div class="product-image">
+        <td>
+            <img src="@Url.Content("~/Hinhanh/" + Model.Anhbia)" class="product-image" />
+        </td>
+        @*<img src="@Model.Anhbia" alt="Ảnh sản phẩm" class="img-fluid" />*@
+    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Hangsanxuat.Tenhang)
-        </dd>
+    <div class="product-details">
+        <table class="table product-details-table">
+            <tbody>
+                <tr>
+                    <th>Hãng sản xuất</th>
+                    <td>@Html.DisplayFor(model => model.Hangsanxuat.Tenhang)</td>
+                </tr>
+                <tr>
+                    <th>Kiểu dáng</th>
+                    <td>@Html.DisplayFor(model => model.Kieudang.Tenkieudang)</td>
+                </tr>
+                <tr>
+                    <th>Tên sản phẩm</th>
+                    <td>@Html.DisplayFor(model => model.Tensp)</td>
+                </tr>
+                <tr>
+                    <th>Giá tiền</th>
+                    <td>@Html.DisplayFor(model => model.Giatien) VND</td>
+                </tr>
+                <tr>
+                    <th>Số lượng</th>
+                    <td>@Html.DisplayFor(model => model.Soluong)</td>
+                </tr>
+                <tr>
+                    <th>Kích cỡ</th>
+                    <td>@Html.DisplayFor(model => model.Kichco)</td>
+                </tr>
+                <tr>
+                    <th>Màu sắc</th>
+                    <td>@Html.DisplayFor(model => model.Mausac)</td>
+                </tr>
+                <tr>
+                    <th>Sản phẩm mới</th>
+                    <td>@Html.DisplayFor(model => model.Sanphammoi)</td>
+                </tr>
+                <tr>
+                    <th>Mô tả</th>
+                    <td class="description">@Html.DisplayFor(model => model.Mota)</td>
+                </tr>
+            </tbody>
+        </table>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Kieudang.Tenkieudang)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Kieudang.Tenkieudang)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Tensp)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Tensp)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Giatien)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Giatien)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Soluong)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Soluong)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Mota)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Mota)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Kichco)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Kichco)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Sanphammoi)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Sanphammoi)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Mausac)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Mausac)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Anhbia)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Anhbia)
-        </dd>
-
-    </dl>
+        <div class="action-buttons">
+            <a href="@Url.Action("Edit", new { id = Model.Masp })" class="btn btn-warning btn-custom">Sửa</a>
+            <a href="@Url.Action("Index")" class="btn btn-primary btn-custom">Về trang chủ</a>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Sửa", "Edit", new { id = Model.Masp }) |
-    @Html.ActionLink("Về trang chủ", "Index")
-</p>
+
+<!-- CSS -->
+<style>
+    .product-details-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .title {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 28px;
+        color: #333;
+        font-weight: bold;
+    }
+
+    .product-image {
+        flex: 1 1 40%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 20px;
+    }
+
+        .product-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+
+    .product-details {
+        flex: 1 1 50%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .product-details-table {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+        .product-details-table th {
+            text-align: left;
+            width: 150px;
+            font-weight: 600;
+            background-color: #f4f4f4;
+            padding: 10px;
+        }
+
+        .product-details-table td {
+            padding: 10px;
+            font-size: 16px;
+        }
+
+    .description {
+        max-width: 400px;
+        word-wrap: break-word;
+        background-color: #f8f9fa;
+        padding: 10px;
+        border-radius: 4px;
+        border: 1px solid #ddd;
+    }
+
+    .action-buttons {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+        margin-top: 20px;
+    }
+
+    .btn-custom {
+        padding: 10px 20px;
+        font-size: 16px;
+        font-weight: 500;
+        border-radius: 5px;
+    }
+
+    .btn-warning {
+        background-color: #ffc107;
+        border-color: #ffc107;
+        color: #fff;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+        color: #fff;
+    }
+
+    .btn-warning:hover {
+        background-color: #e0a800;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+</style>

@@ -51,6 +51,10 @@ namespace Website_ban_quan_ao.Controllers
             {
                 ModelState.AddModelError("Email", "Email phải đúng định dạng Gmail (@gmail.com).");
             }
+            //else if (!System.Text.RegularExpressions.Regex.IsMatch(nguoidung.Email, @"^[a-zA-Z\s]+$"))
+            //{
+            //    ModelState.AddModelError("Gmail", "Gmail chỉ được chứa chữ cái và khoảng trắng, không bao gồm ký tự đặc biệt.");
+            //}
 
             // Kiểm tra số điện thoại: không được để trống, phải có đúng 10 chữ số
             if (string.IsNullOrEmpty(nguoidung.Dienthoai))

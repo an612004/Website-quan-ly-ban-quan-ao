@@ -191,6 +191,8 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Hinhanh\aothuntaydai.jpg" />
+    <Content Include="Hinhanh\Aó thun tay dài.jpg" />
     <Content Include="Hinhanh\dung-luong-banner-thoi-trang.jpg" />
     <Content Include="Hinhanh\facebook.jpg" />
     <Content Include="Hinhanh\google.png" />
@@ -198,9 +200,14 @@
     <Content Include="Hinhanh\shop 1.jpg" />
     <Content Include="Hinhanh\shop 2.jpg" />
     <Content Include="Hinhanh\tải xuống %281%29.jpg" />
+    <Content Include="Hinhanh\áo khoác nỉ 1.jpg" />
+    <Content Include="Hinhanh\áo khoác nỉ 2.jpg" />
+    <Content Include="Hinhanh\áo khác dù 1.jpg" />
     <Content Include="Hinhanh\áo nam 1.jpg" />
     <Content Include="Hinhanh\áo nam 2.jpg" />
     <Content Include="Hinhanh\áo thun nam.jpg" />
+    <Content Include="Hinhanh\áo thun tay dài 2.jpg" />
+    <Content Include="Hinhanh\áo thun tay ngắn 1.jpg" />
     <Content Include="Hinhanh\ảnh chuyển 1.jpg" />
     <Content Include="Hinhanh\ảnh chuyển 10.jpg" />
     <Content Include="Hinhanh\ảnh chuyển 11.jpg" />
@@ -255,6 +262,11 @@
     <Content Include="Areas\Admin\Views\Nguoidungs\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\Chitietdonhangs\Index.cshtml" />
     <Content Include="Areas\Admin\Views\ThongKeDoanhThu\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Kieudangs\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Kieudangs\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Kieudangs\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Kieudangs\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Kieudangs\Create.cshtml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -321,7 +333,6 @@
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Admin\Views\Donhangs\" />
     <Folder Include="Areas\Admin\Views\Hangsanxuats\" />
-    <Folder Include="Areas\Admin\Views\Kieudangs\" />
     <Folder Include="Areas\Admin\Views\Phanquyens\" />
     <Folder Include="Views\Danhmuc\" />
     <Folder Include="Views\GioHang\" />
