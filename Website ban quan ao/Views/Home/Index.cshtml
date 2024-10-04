@@ -210,8 +210,7 @@
     </div>
 </section>
 
-</body>
-</html>
+<
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -225,38 +224,36 @@
         }
 
             .spnoibat h3 {
-                font-size: 40px; /* Tăng kích thước */
-                color: #ff6600; /* Đổi màu sắc */
+                font-size: 40px;
+                color: #ff6600;
                 font-family: 'Arial', sans-serif;
                 margin-bottom: 35px;
-                text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Bóng đổ */
-                transition: color 0.3s ease; /* Hiệu ứng chuyển đổi màu */
+                text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+                transition: color 0.3s ease;
             }
 
                 .spnoibat h3:hover {
-                    color: #ff3300; /* Màu khi di chuột */
+                    color: #ff3300;
                 }
 
         .slider-container {
             position: relative;
             width: 100%;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
+            overflow-x: auto; /* Thêm thanh cuộn ngang */
+            white-space: nowrap; /* Đảm bảo các ảnh không xuống dòng */
         }
 
         .image-slider {
-            display: flex;
-            transition: transform 0.5s ease-in-out;
-            width: calc(700px * 5); /* Tổng chiều rộng của slider dựa trên số lượng ảnh và kích thước mỗi ảnh */
+            display: inline-flex;
         }
 
             .image-slider img {
-                width: 600px; /* Đặt kích thước chiều rộng cho mỗi ảnh */
+                width: 600px;
                 height: auto;
                 max-width: 100%;
-                flex: 0 0 auto; /* Mỗi ảnh sẽ có chiều rộng cố định */
-                margin-right: 10px; /* Khoảng cách giữa các ảnh */
+                margin-right: 10px;
+                border: 3px solid #100f12; /* Tạo đường viền cho ảnh */
+                border-radius: 5px; /* Bo tròn góc của viền */
             }
 
         .arrow {
@@ -284,54 +281,16 @@
     <div class="spnoibat">
         <h3>SẢN PHẨM NỔI BẬT</h3>
         <div class="slider-container">
-            <button class="arrow prev" onclick="slideLeft()">&#10094;</button>
             <div class="image-slider">
-                <img src="~/Hinhanh/ảnh chuyển 1.jpg" class="img-responsive" alt="Ảnh 1" />
-                <img src="~/Hinhanh/ảnh chuyển 1.jpg" class="img-responsive" alt="Ảnh 2" />
-                <img src="~/Hinhanh/ảnh chuyển 1.jpg" class="img-responsive" alt="Ảnh 3" />
-                <img src="~/Hinhanh/ảnh chuyển 1.jpg" class="img-responsive" alt="Ảnh 4" />
-                <img src="~/Hinhanh/ảnh chuyển 1.jpg" class="img-responsive" alt="Ảnh 5" />
+                @*<img src="~/Hinhanh/ảnh chuyển 1.jpg" class="img-responsive" alt="Ảnh 1" />
+                <img src="~/Hinhanh/tải xuống (1).jpg" class="img-responsive" alt="Ảnh 2" />*@
+                <div class="dt">
+                    @Html.Action("AoThunPolo", "Sanpham")
+                </div>
+                @*<img src="~/Hinhanh/ảnh chuyển 1.jpg" class="img-responsive" alt="Ảnh 4" />
+                <img src="~/Hinhanh/ảnh chuyển 1.jpg" class="img-responsive" alt="Ảnh 5" />*@
             </div>
-            <button class="arrow next" onclick="slideRight()">&#10095;</button>
         </div>
     </div>
-
-    <script>
-        let slider = document.querySelector('.image-slider');
-        let imageCount = slider.children.length;
-        let currentIndex = 0;
-
-        // Cập nhật vị trí slider
-        function updateSlider() {
-            const imageWidth = 700 + 10; // Chiều rộng của mỗi ảnh cộng với khoảng cách giữa ảnh
-            slider.style.transform = `translateX(-${currentIndex * imageWidth}px)`;
-        }
-
-        function slideLeft() {
-            if (currentIndex > 0) {
-                currentIndex--;
-                updateSlider();
-            }
-        }
-
-        function slideRight() {
-            if (currentIndex < imageCount - 1) {
-                currentIndex++;
-                updateSlider();
-            }
-        }
-
-        // Khởi tạo slider khi trang tải xong
-        updateSlider();
-    </script>
 </body>
 </html>
-
-<style>
-    .spuachuong {
-        text-align: center;
-        margin-top: 20px;
-        color: #ff3300;
-    }
-</style>
-<h2 class="spuachuong">SẢN PHẨM ƯU CHUỘN </h2>
