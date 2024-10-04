@@ -1,5 +1,8 @@
 -Project Quản lý bán vé máy bay Quản lý task ở mục Project
 
+-Mô tả yêu cầu Phần mềm:
+https://docs.google.com/document/d/14T5wWFPC1_lfGNGU8dA1Dc5dZjJlUmwuy3W58yTvnv8/edit
+
 -File excel : https://docs.google.com/spreadsheets/d/1hDKoF0fnMF7avBV4QpSJ4qOZhP4QVe13/edit?gid=1656092925#gid=1656092925
 
 +SPRINT 1:
