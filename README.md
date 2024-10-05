@@ -9,7 +9,8 @@ https://docs.google.com/document/d/14T5wWFPC1_lfGNGU8dA1Dc5dZjJlUmwuy3W58yTvnv8/
 -Sprint 1 (bao gồm Planning , Sprint meeting , Sprint summary , Sprint Review , Sprint Retrospective) :
 https://docs.google.com/document/d/1h4sBaM9oBDek1ZWzXkW4IN0tJC1OeKHI/edit
 
-
++TestCase_Sprint 1
+https://docs.google.com/document/d/15Co-QQ0wnBvgjFQph8LOrY7GYk0PjPi6/edit
 
 -Kết nối DB theo dạng Code first tải xuống đổi đường dẫn ở Web.Config và chạy
 
