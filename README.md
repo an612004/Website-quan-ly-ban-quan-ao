@@ -1,4 +1,4 @@
--Project Quản lý bán vé máy bay Quản lý task ở mục Project
+-Project Quản lý website bán quần áo Quản lý task ở mục Project
 
 -Mô tả yêu cầu Phần mềm:
 https://docs.google.com/document/d/14T5wWFPC1_lfGNGU8dA1Dc5dZjJlUmwuy3W58yTvnv8/edit
