@@ -19,6 +19,6 @@ https://docs.google.com/document/d/15Co-QQ0wnBvgjFQph8LOrY7GYk0PjPi6/edit
 
 -Dự án này được thực hiện và quản lý bởi nhóm 8 
 
--Góp ý xin liên hệ : hobinhan@gmail.com 
+-Góp ý xin liên hệ : hobinhan321@gmail.com 
 
 
