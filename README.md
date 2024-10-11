@@ -3,7 +3,7 @@
 +Mô tả yêu cầu Phần mềm:
 https://docs.google.com/document/d/14T5wWFPC1_lfGNGU8dA1Dc5dZjJlUmwuy3W58yTvnv8/edit
 
-+File excel : https://docs.google.com/spreadsheets/d/1hDKoF0fnMF7avBV4QpSJ4qOZhP4QVe13/edit?gid=1656092925#gid=1656092925
++File excel : https://docs.google.com/spreadsheets/d/1BGIdH3tj-o7pkSD1xryXE_yEtTTwpfv9/edit?gid=1665634256#gid=1665634256
 
 *SPRINT 1:
 -Sprint 1 (bao gồm Planning , Sprint meeting , Sprint summary , Sprint Review , Sprint Retrospective) :
