@@ -12,6 +12,9 @@ https://docs.google.com/document/d/1h4sBaM9oBDek1ZWzXkW4IN0tJC1OeKHI/edit
 +TestCase_Sprint 1
 https://docs.google.com/document/d/15Co-QQ0wnBvgjFQph8LOrY7GYk0PjPi6/edit
 
+*Sprint 2 (bao gồm , Sprint meeting , Sprint summary , Sprint Review , Sprint Retrospective) :
+https://docs.google.com/document/d/1V4r1V-OteAcokm3H-WSS__vb0FJw22jGWvnYZ4RoQ0w/edit?tab=t.0
+
 **Chú thích**
 -Kết nối DB theo dạng Code first tải xuống đổi đường dẫn ở Web.Config và chạy
 
