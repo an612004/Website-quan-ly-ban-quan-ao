@@ -15,7 +15,7 @@ https://docs.google.com/document/d/15Co-QQ0wnBvgjFQph8LOrY7GYk0PjPi6/edit
 *Sprint 2 (bao gồm , Sprint meeting , Sprint summary , Sprint Review , Sprint Retrospective) :
 https://docs.google.com/document/d/1V4r1V-OteAcokm3H-WSS__vb0FJw22jGWvnYZ4RoQ0w/edit?tab=t.0
 
-Sprint 2 TestCase nằm trong file excel :
++Sprint 2 TestCase nằm trong file excel :
 https://docs.google.com/spreadsheets/d/1BGIdH3tj-o7pkSD1xryXE_yEtTTwpfv9/edit?gid=1562701367#gid=1562701367
 
 
