@@ -17,7 +17,6 @@ https://docs.google.com/document/d/1V4r1V-OteAcokm3H-WSS__vb0FJw22jGWvnYZ4RoQ0w/
 
 +Sprint 2 TestCase nằm trong file excel :
 https://docs.google.com/spreadsheets/d/1BGIdH3tj-o7pkSD1xryXE_yEtTTwpfv9/edit?gid=1562701367#gid=1562701367
-SPRINT 3
 
 +Sprint 3 (bao gồm Planning , Sprint meeting ) : 
 https://docs.google.com/document/d/1Lnjvak-_KbS-JGXqhEHK1Xhz9hyYV28mD6K6I7n194M/edit?tab=t.0
