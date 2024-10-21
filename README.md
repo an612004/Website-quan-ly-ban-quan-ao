@@ -5,7 +5,7 @@
 ### Mô Tả Yêu Cầu Phần Mềm
 - [Yêu cầu phần mềm](https://docs.google.com/document/d/14T5wWFPC1_lfGNGU8dA1Dc5dZjJlUmwuy3W58yTvnv8/edit)
 
-### Tài Liệu Liên Quan
+### File Excel
 - [File Excel](https://docs.google.com/spreadsheets/d/1BGIdH3tj-o7pkSD1xryXE_yEtTTwpfv9/edit?gid=1665634256#gid=1665634256)
 
 ## SPRINT 1
