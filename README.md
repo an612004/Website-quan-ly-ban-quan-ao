@@ -5,7 +5,7 @@ https://docs.google.com/document/d/14T5wWFPC1_lfGNGU8dA1Dc5dZjJlUmwuy3W58yTvnv8/
 
 +File excel : https://docs.google.com/spreadsheets/d/1BGIdH3tj-o7pkSD1xryXE_yEtTTwpfv9/edit?gid=1665634256#gid=1665634256
 
-*SPRINT 1:
+#SPRINT 1:
 -Sprint 1 (bao gồm Planning , Sprint meeting , Sprint summary , Sprint Review , Sprint Retrospective) :
 https://docs.google.com/document/d/1h4sBaM9oBDek1ZWzXkW4IN0tJC1OeKHI/edit
 
