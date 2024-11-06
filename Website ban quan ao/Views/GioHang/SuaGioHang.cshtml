@@ -1,0 +1,131 @@
+﻿@using Website_ban_quan_ao.Models;
+@model List<GioHang>
+
+@{
+    ViewBag.Title = "GioHang";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <center><h2 class="text-info mt-4">GIỎ HÀNG <i class="fa fa-shopping-cart"></i></h2></center>
+
+    <table class="table-bordered font-italic divGioHang mt-4">
+        <tr>
+            <th>Mã SP</th>
+            <th>Tên SP</th>
+            <th>Ảnh bìa</th>
+            <th>Đơn giá</th>
+            <th>Size</th>
+            <th>Số lượng</th>
+            <th>Thành tiền</th>
+            <th>Thao tác</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr class="product-row">
+                <td>@item.iMasp</td>
+                <td>@item.sTensp</td>
+                <td><img src="@Url.Content("~/Hinhanh/" + item.sAnhBia)" class="product-img" /></td>
+                <td data-price="@item.dDonGia">@String.Format("{0:0,0}", item.dDonGia) VNĐ</td>
+                @using (Html.BeginForm("CapNhatGioHang", "GioHang", new { @iMaSP = item.iMasp, @size = item.Size }, FormMethod.Post))
+                {
+                    <td>
+                        <select name="txtSize" class="form-control" onchange="updatePrice(this)">
+                            @for (int size = 36; size <= 45; size++)
+                            {
+                                <option value="@size.ToString()" @(item.Size == size.ToString() ? "selected" : "")>Size @size</option>
+                            }
+                        </select>
+                    </td>
+
+                    <td><input type="number" name="txtSoLuong" value="@item.iSoLuong" min="1" class="form-control quantity-input" onchange="updatePrice(this)" /></td>
+                    <td class="thanh-tien">@String.Format("{0:0,0}", item.ThanhTien) VNĐ</td>
+                    <td>
+                        <input type="submit" value="Cập nhật" class="btn btn-warning" />
+                        <a href="javascript:void(0);" onclick="confirmDelete('@item.iMasp');" class="btn btn-danger">Delete</a>
+                    </td>
+                }
+            </tr>
+        }
+    </table>
+</div>
+
+<script>
+    function confirmDelete(iMasp) {
+        if (confirm('Bạn có chắc chắn muốn xóa sản phẩm này khỏi giỏ hàng không?')) {
+            window.location.href = `/GioHang/XoaGioHang?iMaSP=${iMasp}`;
+        }
+    }
+
+    function updatePrice(element) {
+        const row = element.closest('.product-row');
+        const quantity = row.querySelector('.quantity-input').value;
+        const price = parseFloat(row.querySelector('td[data-price]').getAttribute('data-price'));
+        const total = quantity * price;
+        row.querySelector('.thanh-tien').textContent = `${total.toLocaleString()} VNĐ`;
+    }
+</script>
+
+<style type="text/css">
+    .divGioHang {
+        border: 2px solid #EEEEEE;
+        margin: 10% auto;
+        font-size: large;
+        width: 80%;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        background-color: #f9f9f9;
+        border-radius: 8px;
+    }
+
+    .divGioHang th {
+        padding: 15px;
+        background-color: #007bff;
+        color: white;
+        font-weight: bold;
+        text-align: center;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+    }
+
+    .divGioHang td {
+        padding: 10px;
+        border: 1px solid #EEEEEE;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .product-row:hover {
+        background-color: #e3f2fd;
+        cursor: pointer;
+    }
+
+    .product-img {
+        width: 60px;
+        height: 60px;
+        object-fit: cover;
+        border-radius: 4px;
+    }
+
+    .quantity-input {
+        width: 60px;
+    }
+
+    .btn-warning {
+        margin-right: 5px;
+        color: #fff;
+        background-color: #ffc107;
+        border-color: #ffc107;
+        border-radius: 4px;
+    }
+
+    .btn-danger {
+        color: #fff;
+        background-color: #dc3545;
+        border-color: #dc3545;
+        border-radius: 4px;
+    }
+
+    .btn:hover {
+        opacity: 0.9;
+    }
+</style>

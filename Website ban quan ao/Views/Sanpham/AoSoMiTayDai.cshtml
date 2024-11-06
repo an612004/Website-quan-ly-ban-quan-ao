@@ -129,7 +129,7 @@
 
     .product-card {
         position: relative;
-        overflow: hidden; /* Đảm bảo các phần tử con không bị tràn */
+        overflow: hidden;
     }
 
     .sale-badge {
@@ -158,8 +158,8 @@
 </div>
 
 <div class="header">
-    <h3 class="brand-title">Áo sơ Mi Tay Dài</h3>
-    <a href="@Url.Action("Index", "Home")" class="btn btn-back">Quay lại trang chủ</a> <!-- Nút quay lại -->
+    <h3 class="brand-title">Aó Sơ Mi Tay Dài</h3>
+    <a href="@Url.Action("Index", "Home")" class="btn btn-back">Quay lại trang chủ</a>
 </div>
 
 <div class="products-container">
@@ -216,7 +216,7 @@
                 </select>
                 <br /><br />
                 <input type="number" name="quantity" value="1" min="1" style="width: 60px;" required>
-                <input type="submit" value="Thêm vào giỏ hàng" class="btn btn-primary" onclick="addToCart('@item.Tensp')" />
+                <input type="submit" value="Thêm vào giỏ hàng" class="btn btn-primary" onclick="addToCart('@item.Tensp', '@item.Masp')" />
             }
         </div>
     }
@@ -225,51 +225,51 @@
 <div class="cart-notification" id="cart-notification">
     Sản phẩm đã được thêm vào giỏ hàng!
 </div>
-<script>// Lấy tất cả các sản phẩm hiện có trong danh sách
+
+<script>
     var allProducts = document.querySelectorAll('.product-card');
 
-    // Hàm xử lý tìm kiếm
     function searchProducts() {
         var searchQuery = document.getElementById("searchInput1").value.toLowerCase();
         var minPrice = parseFloat(document.getElementById("minPrice1").value);
         var maxPrice = parseFloat(document.getElementById("maxPrice1").value);
 
         allProducts.forEach(function (product) {
-            var productName = product.querySelector('h3').innerText.toLowerCase();
-            var productPrice = parseFloat(product.querySelector('h3').nextElementSibling.innerText.replace('Giá: ', '').replace(' đ', ''));
+            var productName = product.querySelector('h3').textContent.toLowerCase();
+            var priceText = product.querySelector('h3 + h3').textContent.replace(/[^\d]/g, '');
+            var productPrice = parseFloat(priceText);
 
-            if (productName.indexOf(searchQuery) === -1 || (minPrice && productPrice < minPrice) || (maxPrice && productPrice > maxPrice)) {
-                product.style.display = 'none';
+            var matchesSearch = productName.includes(searchQuery);
+            var matchesPrice = (!isNaN(minPrice) ? productPrice >= minPrice : true) &&
+                (!isNaN(maxPrice) ? productPrice <= maxPrice : true);
+
+            if (matchesSearch && matchesPrice) {
+                product.style.display = '';
             } else {
-                product.style.display = 'block';
+                product.style.display = 'none';
             }
         });
     }
 
-    function resetSearchFields() {
+    document.getElementById("searchButton1").addEventListener("click", searchProducts);
+    document.getElementById("resetButton").addEventListener("click", function () {
         document.getElementById("searchInput1").value = '';
         document.getElementById("minPrice1").value = '';
         document.getElementById("maxPrice1").value = '';
-        searchProducts();
-    }
-
-    document.getElementById('searchButton1').addEventListener('click', function () {
-        searchProducts();
+        allProducts.forEach(function (product) {
+            product.style.display = '';
+        });
     });
 
-    document.getElementById('resetButton').addEventListener('click', function () {
-        resetSearchFields();
-    });
+    function addToCart(productName, productId) {
+        event.preventDefault(); // Prevent form submission initially
+        var sizeSelect = document.getElementById('size-' + productId); // Get the size dropdown for the product
 
-    document.addEventListener('keypress', function (e) {
-        if (e.key === 'Enter') {
-            e.preventDefault();
-            searchProducts();
+        if (!sizeSelect.value) {
+            alert('Vui lòng chọn size trước khi thêm sản phẩm vào giỏ hàng!');
+            return; // Stop if no size is selected
         }
-    });
 
-    function addToCart(productName) {
-        event.preventDefault();
         var notification = document.getElementById('cart-notification');
         notification.textContent = productName + " đã được thêm vào giỏ hàng!";
         notification.style.display = 'block';
@@ -277,5 +277,6 @@
             notification.style.display = 'none';
         }, 3000);
 
-        event.target.closest('form').submit();
-    }</script>
+        document.getElementById('form-' + productId).submit(); // Submit the form once the size is selected
+    }
+</script>

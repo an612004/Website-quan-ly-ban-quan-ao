@@ -1,0 +1,95 @@
+﻿@model Website_ban_quan_ao.Models.TinTuc
+
+@{
+    ViewBag.Title = "Chỉnh Sửa Bài Viết";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Chỉnh Sửa Bài Viết</h2>
+
+@using (Html.BeginForm("Edit", "TinTuc", new { area = "Admin", id = Model.Id }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.TieuDe)
+        @Html.TextBoxFor(model => model.TieuDe, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.TieuDe, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.NoiDung)
+        @Html.TextAreaFor(model => model.NoiDung, new { @class = "form-control", rows = 5 })
+        @Html.ValidationMessageFor(model => model.NoiDung, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Anhbia, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @if (!string.IsNullOrEmpty(Model.Anhbia))
+            {
+                <img src="@Url.Content(Model.Anhbia)" alt="Ảnh bìa" class="product-image" />
+                <input type="file" id="Anhbia" name="Anhbia" class="form-control" style="display: none;" />
+                <button type="button" class="btn btn-info" onclick="$('#Anhbia').click();">Chọn lại tệp</button>
+            }
+            else
+            {
+                <input type="file" id="Anhbia" name="Anhbia" class="form-control" />
+            }
+            @Html.ValidationMessageFor(model => model.Anhbia, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.TrangThai)
+        @Html.CheckBoxFor(model => model.TrangThai)
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Lưu" class="btn btn-primary" />
+        <a href="@Url.Action("Index", "TinTuc", new { area = "Admin" })" class="btn btn-secondary">Hủy</a>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<style>
+    /* Căn chỉnh khung chứa ở giữa màn hình */
+    .edit-container {
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        background-color: #fff;
+        max-width: 600px;
+        margin: 50px auto; /* Đặt phần tử giữa màn hình */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Các cài đặt bổ sung khác */
+    .product-image {
+        max-width: 150px;
+        max-height: 150px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        margin-bottom: 10px;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+        .form-group label {
+            font-weight: bold;
+        }
+
+    .btn {
+        margin-right: 5px;
+    }
+
+    .text-danger {
+        font-size: 0.9em;
+        color: #d9534f;
+    }
+</style>
+

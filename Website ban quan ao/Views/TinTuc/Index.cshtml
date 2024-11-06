@@ -1,8 +1,201 @@
-﻿
+﻿@using Website_ban_quan_ao.Models
+@model List<TinTuc>
+
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Tin Tức";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<div class="intro-section d-flex flex-column flex-md-row align-items-center my-5">
+    <div class="intro-image">
+        <img src="https://bizweb.dktcdn.net/100/438/408/themes/916476/assets/dp.jpg?1691036978974" class="img-fluid" alt="blog">
+    </div>
+    <div class="intro-content ms-md-4 mt-4 mt-md-0">
+        <h1 class="intro-title">AnBi BLOG</h1>
+        <p class="intro-subtitle">Everyday wear - Everyday read</p>
+        <p class="intro-description">Nam giới đang ưa chuộng những chiếc quần caro nam bởi đây là kiểu quần có thể kết hợp được với nhiều loại trang phục</p>
+    </div>
+</div>
 
+@using (Html.BeginForm("Index", "TinTuc", FormMethod.Get))
+{
+    <div class="search-bar-container">
+        <input type="text" name="searchString" class="search-input" placeholder="Tìm kiếm bài viết" value="@Request.QueryString["searchString"]" />
+        <button type="submit" class="search-button">
+            <i class="bi bi-search"></i> <!-- Icon Bootstrap -->
+        </button>
+    </div>
+}
+<h2 class="section-title">Bài Viết Mới Nhất</h2>
+
+<div class="news-container row">
+    @foreach (var item in Model)
+    {
+        if (item.TrangThai)
+        {
+            <div class="col-md-4 mb-4 d-flex align-items-stretch">
+                <div class="card shadow-sm h-100">
+                    <img src="@Url.Content("~/Hinhanh/" + item.Anhbia)" alt="@item.TieuDe" class="card-img-top" style="height: 220px; object-fit: cover;" />
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title text-truncate">@item.TieuDe</h5>
+                        <p class="card-text flex-grow-1 text-truncate">
+                            @if (item.NoiDung.Length > 120)
+                            {
+                                @Html.Raw(item.NoiDung.Substring(0, 120) + "...")
+                            }
+                            else
+                            {
+                                @item.NoiDung
+                            }
+                        </p>
+                        <div class="mt-auto">
+                            <a href="@Url.Action("Details", "TinTuc", new { id = item.Id })" class="btn btn-outline-primary btn-sm">Xem Chi Tiết</a>
+                        </div>
+                        <p class="card-date mt-2"><small class="text-muted">Ngày Đăng: @item.NgayTao.ToString("dd/MM/yyyy")</small></p>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>
+
+
+<style>
+    /* Các kiểu CSS như trước */
+</style>
+
+
+<style>
+    .intro-section {
+        max-width: 100%; /* Chiều rộng tối đa của phần này là 100% */
+        margin: auto; /* Căn giữa phần tử */
+        padding: 20px; /* Khoảng cách bên trong là 20px */
+        background-color: #f8f8f8; /* Màu nền xám nhạt */
+        border-radius: 8px; /* Bo góc 8px */
+        transform: translateY(-40px); /* Di chuyển cả khung lên trên 10px */
+    }
+
+    .intro-image img {
+        width: 100%;
+        max-width: 800px; /* Extend the width for a more panoramic look */
+        height: 300px; /* Slightly reduce height */
+        object-fit: cover;
+        border-radius: 8px;
+    }
+
+    .intro-content {
+        max-width: 500px;
+    }
+
+    .intro-title {
+        font-size: 2.5em;
+        font-weight: bold;
+        color: #333;
+    }
+
+    .intro-subtitle {
+        font-size: 1.2em;
+        color: #888;
+        margin-bottom: 15px;
+    }
+
+    .intro-description {
+        font-size: 1em;
+        color: #555;
+    }
+    /* Section Title */
+    .section-title {
+        text-align: center;
+        font-size: 2em;
+        margin: 40px 0 20px;
+        color: #333;
+    }
+
+    /* News Cards */
+    .news-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .card {
+        border: none;
+        border-radius: 8px;
+        overflow: hidden;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        background-color: #ffffff;
+    }
+
+        .card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+    .card-title {
+        font-size: 1.2em;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 10px;
+    }
+
+    .card-text {
+        font-size: 0.95em;
+        color: #555;
+        max-height: 40px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .card-date {
+        font-size: 0.85em;
+        color: #888;
+        text-align: right;
+    }
+
+    .btn-outline-primary {
+        font-size: 0.9em;
+        border-radius: 20px;
+        padding: 4px 10px;
+        color: #007bff;
+        border: 1px solid #007bff;
+    }
+
+        .btn-outline-primary:hover {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+    /* Căn giữa thanh tìm kiếm */
+    .search-bar-container {
+        display: flex;
+        justify-content: center;
+        margin: 20px 0; /* Khoảng cách trên và dưới */
+    }
+
+    /* Thanh tìm kiếm */
+    .search-input {
+        width: 80%; /* Chiều rộng thanh tìm kiếm */
+        max-width: 600px; /* Đặt chiều rộng tối đa */
+        padding: 10px 15px;
+        border: 1px solid #ced4da; /* Viền thanh tìm kiếm */
+        border-radius: 20px 0 0 20px; /* Bo góc bên trái */
+        outline: none;
+        font-size: 16px;
+    }
+
+    /* Nút tìm kiếm */
+    .search-button {
+        padding: 10px 15px;
+        background-color: #007bff; /* Màu nền nút */
+        color: #fff; /* Màu chữ nút */
+        border: none;
+        border-radius: 0 20px 20px 0; /* Bo góc bên phải */
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+        /* Icon tìm kiếm */
+        .search-button i {
+            font-size: 18px;
+        }
+</style>

@@ -1,0 +1,155 @@
+﻿@using Website_ban_quan_ao.Models;
+@model List<GioHang>
+
+@{
+    ViewBag.Title = "Giỏ Hàng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="gio-hang-container">
+    <h2>GIỎ HÀNG <i class="fa fa-shopping-cart"></i></h2>
+    <br />
+
+    <table class="table-hover table-bordered divGioHang">
+        <thead>
+            <tr>
+                <th>Mã SP</th>
+                <th>Tên SP</th>
+                <th>Ảnh bìa</th>
+                <th>Đơn giá</th>
+                <th>Size</th>
+                <th>Số lượng</th>
+                <th>Thành tiền</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                decimal tongTien = 0;
+            }
+            @foreach (var item in Model)
+            {
+                <tr class="font-italic">
+                    <td>@item.iMasp</td>
+                    <td>@item.sTensp</td>
+                    <td><img src="@Url.Content("~/Hinhanh/" + item.sAnhBia)" class="img-thumbnail" /></td>
+                    <td>@String.Format("{0:0,0}", item.dDonGia) VNĐ</td>
+                    <td>@item.Size</td> <!-- Hiển thị Size của sản phẩm -->
+                    <td>@item.iSoLuong</td>
+                    <td>@String.Format("{0:0,0}", item.ThanhTien) VNĐ</td>
+                </tr>
+                tongTien += Convert.ToDecimal(item.ThanhTien);
+            }
+            <tr class="total-row">
+                <td colspan="7">
+                    <strong>Tổng tiền:</strong> @String.Format("{0:0,0}", tongTien) VNĐ
+                </td>
+            </tr>
+            <tr class="edit-cart">
+                <td colspan="7">
+                    @Html.ActionLink("Chỉnh sửa giỏ hàng", "SuaGioHang", null, new { @class = "btn btn-edit" })
+                </td>
+            </tr>
+            <tr class="checkout-buttons">
+                <td colspan="7">
+                    @using (Html.BeginForm("DatHang", "GioHang", FormMethod.Post, new { @class = "order-form" }))
+                    {
+                        <input type="submit" value="Đặt hàng COD" class="btn btn-danger" />
+                    }
+                    <form action="/GioHang/DatHangOnline" method="post" class="order-form">
+                        <input type="submit" value="Đặt hàng Vnpay" class="btn btn-primary" />
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<style>
+    .gio-hang-container {
+        padding: 20px;
+        background-color: #f8f9fa;
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        margin: 20px auto;
+        width: 80%;
+    }
+
+    h2 {
+        text-align: center;
+        color: #333;
+        font-weight: bold;
+        font-size: 1.8em;
+    }
+
+    .divGioHang {
+        border-collapse: collapse;
+        width: 100%;
+        margin-top: 10px;
+        font-size: 1em;
+    }
+
+        .divGioHang td, .divGioHang th {
+            padding: 15px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+
+        .divGioHang th {
+            background-color: #dea185;
+            color: white;
+            font-weight: bold;
+        }
+
+        .divGioHang tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+    .img-thumbnail {
+        width: 60px;
+        height: 60px;
+        border-radius: 5px;
+    }
+
+    .total-row td {
+        background-color: #e9ecef;
+        font-size: 1.2em;
+        font-weight: bold;
+        text-align: right;
+    }
+
+    .edit-cart, .checkout-buttons {
+        text-align: right;
+    }
+
+    .btn {
+        padding: 8px 16px;
+        margin: 5px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1em;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        color: white;
+    }
+
+    .btn-danger {
+        background-color: #dc3545;
+        color: white;
+    }
+
+    .btn-edit {
+        background-color: #ffc107;
+        color: black;
+    }
+
+    .btn:hover {
+        opacity: 0.9;
+    }
+
+    .order-form {
+        display: inline;
+    }
+</style>

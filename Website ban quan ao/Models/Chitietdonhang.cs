@@ -44,7 +44,7 @@ namespace Website_ban_quan_ao.Models
         public string size { get; set; }
 
         [ForeignKey("Masp")]
-        public virtual Donhang Donhang { get; set; }
+        public virtual Sanpham Sanpham { get; set; }
 
     }
 }

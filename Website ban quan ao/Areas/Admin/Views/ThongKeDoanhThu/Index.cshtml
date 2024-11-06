@@ -2,38 +2,34 @@
     ViewBag.Title = "Thống kê doanh thu";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
-<h3 style="margin-top:20px">Quản lý doanh thu</h3>
+<h3 style="margin-top:20px; text-align: center;">Quản lý doanh thu</h3>
 <section class="content">
-    <div class="col-md-4">
+    <div class="col-md-6 offset-md-3">
         <form id="searchForm" class="form-inline">
             <div class="form-group">
                 <label for="fromDate">Từ ngày</label>
-                <input style="margin-left:15px" type="text" class="form-control" id="fromDateInput" name="fromDate" placeholder="dd/MM/yyyy">
+                <input style="margin-left:10px; width: 150px;" type="text" class="form-control" id="fromDateInput" name="fromDate" placeholder="dd/MM/yyyy">
             </div>
-            <div class="form-group">
+            <div class="form-group" style="margin-left: 20px;">
                 <label for="toDate">Đến ngày</label>
-                <input style="margin-left:5px" type="text" class="form-control" id="toDateInput" name="toDate" placeholder="dd/MM/yyyy">
+                <input style="margin-left:10px; width: 150px;" type="text" class="form-control" id="toDateInput" name="toDate" placeholder="dd/MM/yyyy">
             </div>
-            <button type="submit" class="btn btn-primary">Xem</button>
+            <button type="submit" class="btn btn-primary" style="margin-left: 20px;">Xem</button>
         </form>
     </div>
+
     <!-- Default box -->
-    <div class="card">
+    <div class="card" style="margin-top: 30px;">
         <div class="card-header">
-            <h3 class="card-title">DOANH THU</h3>
+            <h3 class="card-title text-center">DOANH THU</h3>
         </div>
         <div class="card-body">
             <div class="row">
-                <div class="col-md-8">
-                    <div class="chart">
-                        <canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
-                    </div>
-                </div>
                 <div class="col-md-4">
-                    <div style="max-height: 250px; overflow: auto;">
+                    <div class="highlight-card">
                         <table class="table table-bordered">
                             <thead>
-                                <tr>
+                                <tr class="text-center" style="background-color: #faa907;">
                                     <th>#</th>
                                     <th>Ngày</th>
                                     <th>Doanh thu</th>
@@ -44,34 +40,50 @@
                         </table>
                     </div>
                 </div>
+                <div class="col-md-8">
+                    <div class="chart">
+                        <canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </section>
-@section scripts{
 
+
+@section scripts{
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-    <script>$(function () {
+    <script>
+        $(function () {
             var arrDoanhThu = [];
             var arrLoiNhuan = [];
             var arrDate = [];
             var barChart;
+
             // Sự kiện "submit" cho biểu mẫu
             $('#searchForm').submit(function (event) {
                 event.preventDefault(); // Ngăn chặn hành vi mặc định của biểu mẫu
-                // Lấy giá trị từ hai ô input
+
                 var fromDate = $('#fromDateInput').val();
                 var toDate = $('#toDateInput').val();
+
                 // Kiểm tra định dạng ngày tháng hợp lệ
                 if (!isValidDateFormat(fromDate) || !isValidDateFormat(toDate)) {
                     alert("Vui lòng nhập ngày tháng theo định dạng dd/MM/yyyy.");
                     return;
                 }
-                // Xóa dữ liệu cũ trước khi cập nhật biểu đồ với dữ liệu mới
+
+                // Kiểm tra nếu fromDate sau toDate
+                if (moment(fromDate, "DD/MM/YYYY").isAfter(moment(toDate, "DD/MM/YYYY"))) {
+                    alert("Ngày bắt đầu không thể sau ngày kết thúc.");
+                    return;
+                }
+
                 arrDoanhThu = [];
                 arrLoiNhuan = [];
                 arrDate = [];
+
                 // Thực hiện AJAX request với giá trị mới
                 $.ajax({
                     url: '/Admin/ThongKeDoanhThu/GetDuLieu',
@@ -79,7 +91,6 @@
                     data: { fromDate: fromDate, toDate: toDate },
                     success: function (res) {
                         if (res.ketqua) {
-                            // Xử lý dữ liệu và hiển thị nó
                             $.each(res.Data, function (index, item) {
                                 var strNgay = moment(item.Date).format("DD/MM/YYYY");
                                 arrDate.push(strNgay);
@@ -94,74 +105,156 @@
                                         label: 'Lợi nhuận AnBiShop',
                                         backgroundColor: 'rgba(60,141,188,0.9)',
                                         borderColor: 'rgba(60,141,188,0.8)',
-                                        pointRadius: false,
-                                        pointColor: '#3b8bba',
-                                        pointStrokeColor: 'rgba(60,141,188,1)',
-                                        pointHighlightFill: '#fff',
-                                        pointHighlightStroke: 'rgba(60,141,188,1)',
                                         data: arrLoiNhuan
                                     },
                                     {
                                         label: 'Doanh thu AnbiShop',
                                         backgroundColor: 'rgba(210, 214, 222, 1)',
                                         borderColor: 'rgba(210, 214, 222, 1)',
-                                        pointRadius: false,
-                                        pointColor: 'rgba(210, 214, 222, 1)',
-                                        pointStrokeColor: '#c1c7d1',
-                                        pointHighlightFill: '#fff',
-                                        pointHighlightStroke: 'rgba(220,220,220,1)',
                                         data: arrDoanhThu
                                     },
                                 ]
                             }
-                            if (barChart) {
-                                // Nếu biểu đồ đã tồn tại, hủy nó trước khi tạo một biểu đồ mới
-                                barChart.destroy();
-                            }
-                            var barChartCanvas = $('#barChart').get(0).getContext('2d')
-                            var barChartData = $.extend(true, {}, areaChartData)
-                            var temp0 = areaChartData.datasets[0]
-                            var temp1 = areaChartData.datasets[1]
-                            barChartData.datasets[0] = temp1
-                            barChartData.datasets[1] = temp0
-                            var barChartOptions = {
-                                responsive: true,
-                                maintainAspectRatio: false,
-                                datasetFill: false
-                            }
+                            if (barChart) barChart.destroy();
+
+                            var barChartCanvas = $('#barChart').get(0).getContext('2d');
                             barChart = new Chart(barChartCanvas, {
                                 type: 'bar',
-                                data: barChartData,
-                                options: barChartOptions
+                                data: areaChartData,
+                                options: {
+                                    responsive: true,
+                                    maintainAspectRatio: false,
+                                    datasetFill: false
+                                }
                             });
                         } else {
                             alert("Số ngày tìm kiếm quá lớn.");
                         }
                     },
                     error: function (error) {
-                        // Xử lý lỗi nếu có
+                        alert("Đã xảy ra lỗi. Vui lòng thử lại sau.");
                     }
                 });
             });
+
             // Hàm xử lý dữ liệu
             function hello(rsss) {
                 var strchuoi = "";
                 $.each(rsss, function (index, item) {
                     var strNgay = moment(item.Date).format("DD/MM/YYYY");
-                    strchuoi += "<tr>";
-                    strchuoi += "<td>" + (index + 1) + "</td>";
-                    strchuoi += "<td>" + strNgay + "</td>";
-                    strchuoi += "<td>" + item.DoanhThu + "</td>";
-                    strchuoi += "<td>" + item.LoiNhuan + "</td>";
-                    strchuoi += "</tr>";
+                    strchuoi += `<tr class="text-center">
+                                                    <td>${index + 1}</td>
+                                                    <td>${strNgay}</td>
+                                                    <td>${item.DoanhThu}</td>
+                                                    <td>${item.LoiNhuan}</td>
+                                                 </tr>`;
                 });
                 $('#load_data').html(strchuoi);
             }
+
             // Hàm kiểm tra định dạng ngày tháng "dd/MM/yyyy"
             function isValidDateFormat(dateString) {
                 var regEx = /^\d{2}\/\d{2}\/\d{4}$/;
                 return regEx.test(dateString);
             }
-        });</script>
-
+        });
+    </script>
 }
+<style>
+    <style >
+    h3 {
+        margin-top: 20px;
+        text-align: center;
+        font-size: 24px;
+        font-weight: bold;
+        color: #333;
+    }
+
+    #searchForm {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        padding: 10px;
+        /*background-color: #e3f2fd;*/ /* Light Blue */
+       /* border: 1px solid #2196f3;  Blue Border */
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+        #searchForm .form-group {
+            display: flex;
+            align-items: center;
+        }
+
+        #searchForm label {
+            font-weight: bold;
+        }
+
+    .card {
+        margin-top: 30px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    .card-header {
+        background-color: #eda68c;
+        color: #fff;
+        padding: 15px;
+        text-align: center;
+    }
+
+    .card-title {
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    .table {
+        background-color: #fafafa;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+    }
+
+        .table th, .table td {
+            text-align: center;
+            vertical-align: middle;
+            padding: 8px;
+        }
+
+        .table thead th {
+            background-color: #dff071;
+            color: #421616; /*đổi màu chữ*/
+            border-bottom: 2px solid #ccc;
+        }
+
+        .table tbody tr {
+            transition: background-color 0.3s;
+        }
+
+            .table tbody tr:hover {
+                background-color: #ebce3f;
+            }
+
+    .chart {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 15px;
+    }
+
+    #barChart {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .highlight-card {
+        background-color: #fff8e1; /* Light Yellow */
+        border: 1px solid #faa907; /* Yellow Border */
+        padding: 15px;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        margin-bottom: 15px;
+    }
+</style>
+

@@ -179,7 +179,7 @@
                             <li>@Html.ActionLink("Dây Nịt", "DayNit", "Sanpham", new { area = "" }, new { @class = "dropdown-item" })</li>
                         </ul>
                     </li>
-                    <li>@Html.ActionLink("Tin Tức", "Index", "TinTuc", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Tin Hot", "Index", "TinTuc", new { area = "" }, new { @class = "nav-link" })</li>
                     <li>@Html.ActionLink("Giới Thiệu", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                     <li>@Html.ActionLink("Liên hệ", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                     <li>@Html.ActionLink("Tất cả sản phẩm", "Index", "Sanpham", new { area = "" }, new { @class = "nav-link" })</li>
@@ -210,8 +210,8 @@
                             <a class="nav-link" href="#"><i class="fas fa-search"></i></a>
                         </li>*@
                     <li class="nav-item cart-icon">
-                        <a class="nav-link" href="#"><i class="fas fa-shopping-cart"></i></a>
-                        <span class="item-count" id="cartItemCount">0</span>
+                        <a class="nav-link" href="@Url.Action("GioHang", "GioHang")"><i class="fa fa-shopping-cart" style="font-size:25px"></i>: (@Html.Action("TongSoLuong", "GioHang"))</a>
+                        @*<span class="item-count" id="cartItemCount">0</span>*@
                     </li>
                 </ul>
             </div>
@@ -314,7 +314,7 @@
     <div class="main-footer--copyright">
         <div class="container">
             <div class="main-footer--border">
-                <p>Copyright © 2024 <a href="https://kenta.vn"> AnbiShop.VN</a>.</p>
+                <p>Copyright © 2024 <a href="Home/Index"> AnbiShop.VN</a>.</p>
             </div>
         </div>
     </div>
@@ -322,7 +322,7 @@
 
 @Scripts.Render("~/bundles/jquery")
 @Scripts.Render("~/bundles/bootstrap")
-@RenderSection("scripts", required: false)
+@*@RenderSection("scripts", required: false)*@
 </div>
 
 <!-- CSS cho phần footer -->

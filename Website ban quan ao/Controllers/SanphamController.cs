@@ -37,6 +37,32 @@ namespace Website_ban_quan_ao.Controllers
 
             return View(filteredSanphams);
         }
+        public ActionResult Brioni()
+        {
+            var nike = db.Sanphams.Where(n => n.Mahang == 1).Take(20).ToList();
+            return PartialView(nike);
+        }
+        public ActionResult Calvin()
+        {
+            var adidas = db.Sanphams.Where(n => n.Mahang == 2).Take(20).ToList();
+            return PartialView(adidas);
+        }
+        public ActionResult Gucci()
+        {
+            var puma = db.Sanphams.Where(n => n.Mahang == 3).Take(20).ToList();
+            return PartialView(puma);
+        }
+        public ActionResult Owen()
+        {
+            var puma = db.Sanphams.Where(n => n.Mahang == 4).Take(20).ToList();
+            return PartialView(puma);
+        }
+        public ActionResult Merriman()
+        {
+            var puma = db.Sanphams.Where(n => n.Mahang == 5).Take(20).ToList();
+            return PartialView(puma);
+        }
+
         public ActionResult xemchitiet(int Masp = 0)
         {
             var chitiet = db.Sanphams.SingleOrDefault(n => n.Masp == Masp);
@@ -86,22 +112,22 @@ namespace Website_ban_quan_ao.Controllers
         }
         public ActionResult AoThunTayNgan()
         {
-            var AoThunTayNgan = db.Sanphams.Where(n=> n.Makieudang == 3).Take(20).ToList();
+            var AoThunTayNgan = db.Sanphams.Where(n => n.Makieudang == 3).Take(20).ToList();
             return PartialView(AoThunTayNgan);
         }
         public ActionResult AoThunTayDai()
         {
-            var AoThunTayDai = db.Sanphams.Where(n => n.Makieudang == 4).Take(20).ToList();  
+            var AoThunTayDai = db.Sanphams.Where(n => n.Makieudang == 4).Take(20).ToList();
             return PartialView(AoThunTayDai);
         }
         public ActionResult AoThunPoLo()
         {
-            var AoThunPoLo = db.Sanphams. Where(n => n.Makieudang == 5).Take(20).ToList();
+            var AoThunPoLo = db.Sanphams.Where(n => n.Makieudang == 5).Take(20).ToList();
             return PartialView(AoThunPoLo);
         }
         public ActionResult AoSoMiTayNgan()
         {
-            var AoSoMiTayNgan = db .Sanphams.Where( n => n .Makieudang == 6).Take(20).ToList();
+            var AoSoMiTayNgan = db.Sanphams.Where(n => n.Makieudang == 6).Take(20).ToList();
             return PartialView(AoSoMiTayNgan);
         }
         public ActionResult AoSoMiTayDai()
@@ -122,7 +148,7 @@ namespace Website_ban_quan_ao.Controllers
         }
         public ActionResult QuanJean()
         {
-            var QuanJean = db.Sanphams.Where(n => n.Makieudang == 10).Take(20).ToList();    
+            var QuanJean = db.Sanphams.Where(n => n.Makieudang == 10).Take(20).ToList();
             return PartialView(QuanJean);
         }
         public ActionResult QuanShortKaki()

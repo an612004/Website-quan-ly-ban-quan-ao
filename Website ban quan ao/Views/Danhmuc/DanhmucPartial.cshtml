@@ -1,0 +1,61 @@
+﻿@using Website_ban_quan_ao.Models;
+@model List<Hangsanxuat>
+
+<br />
+
+<div class="brand-section">
+
+    <h3>THƯƠNG HIỆU NỔI BẬT</h3>
+
+    <div class="brand-container">
+        @foreach (var item in Model)
+        {
+            <div class="brand-button">
+                <a href="@Url.Action(item.Tenhang.Trim(), "Sanpham", new { tenThuongHieu = item.Tenhang.Trim() })">@item.Tenhang.Trim()</a>
+            </div>
+        }
+    </div>
+</div>
+
+<style>
+    .brand-section {
+        background-color: #d8e9ed; /* Màu nền trắng xanh dương nhạt */
+        padding: 100px; /* Thêm khoảng cách bên trong */
+        border-radius: 8px; /* Bo góc */
+    }
+
+    .brand-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin: 10px 0;
+    }
+
+    .brand-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 150px; /* Chiều rộng mở rộng */
+        height: 60px; /* Chiều cao cố định */
+        margin: 10px; /* Khoảng cách giữa các nút */
+        background-color: #b8799e; /* Màu nền xanh dương */
+        color: white;
+        text-decoration: none;
+        border: 2px solid #0056b3; /* Viền cố định */
+        border-radius: 5px;
+        font-weight: bold;
+        transition: background-color 0.3s;
+    }
+
+        .brand-button:hover {
+            background-color: #0056b3; /* Màu nền khi hover */
+        }
+
+        .brand-button a {
+            color: white;
+            text-decoration: none;
+            width: 100%;
+            text-align: center;
+            line-height: 60px; /* Căn giữa văn bản theo chiều dọc */
+        }
+</style>

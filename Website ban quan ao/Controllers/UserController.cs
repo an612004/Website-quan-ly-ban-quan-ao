@@ -1,12 +1,12 @@
-﻿using System;
+﻿using PagedList;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Web;
 using System.Web.Mvc;
-using Website_ban_quan_ao.Models;
+using Website_ban_quan_ao.Models;  // Thêm dòng này
 
 namespace Website_ban_quan_ao.Controllers
 {
@@ -51,10 +51,6 @@ namespace Website_ban_quan_ao.Controllers
             {
                 ModelState.AddModelError("Email", "Email phải đúng định dạng Gmail (@gmail.com).");
             }
-            //else if (!System.Text.RegularExpressions.Regex.IsMatch(nguoidung.Email, @"^[a-zA-Z\s]+$"))
-            //{
-            //    ModelState.AddModelError("Gmail", "Gmail chỉ được chứa chữ cái và khoảng trắng, không bao gồm ký tự đặc biệt.");
-            //}
 
             // Kiểm tra số điện thoại: không được để trống, phải có đúng 10 chữ số
             if (string.IsNullOrEmpty(nguoidung.Dienthoai))
@@ -105,7 +101,6 @@ namespace Website_ban_quan_ao.Controllers
             return View("Dangky");
         }
 
-
         public ActionResult Dangnhap()
         {
             LoginModel loginModel = new LoginModel();
@@ -117,51 +112,68 @@ namespace Website_ban_quan_ao.Controllers
         public ActionResult Dangnhap(FormCollection userlog)
         {
             LoginModel model = new LoginModel();
+
+            // Kiểm tra tính hợp lệ của ModelState
             if (ModelState.IsValid)
             {
+                // Lấy dữ liệu từ form
                 string userMail = userlog["userMail"];
                 string password = userlog["password"];
-                // Kiểm tra trường email và password không được để trống
+
+                // Kiểm tra xem email có bị bỏ trống không
                 if (string.IsNullOrEmpty(userMail))
                 {
                     ModelState.AddModelError("userMail", "Email không được để trống.");
                 }
+
+                // Kiểm tra xem mật khẩu có bị bỏ trống không
                 if (string.IsNullOrEmpty(password))
                 {
                     ModelState.AddModelError("password", "Mật khẩu không được để trống.");
                 }
 
-                // Nếu các điều kiện không thỏa mãn
+                // Nếu có lỗi trong dữ liệu đầu vào, trả về view với model lỗi
                 if (!ModelState.IsValid)
                 {
                     return View(model);
                 }
-                //Mã hóa mật khẩu
-                var f_password = GetMD5(password);
-                //Kiểm tra thông tin đăng nhập
-                var islogin = db.Nguoidungs.SingleOrDefault(x => x.Email.Equals(userMail) && x.Matkhau.Equals(f_password));
+
+                // Mã hóa mật khẩu trước khi so sánh với cơ sở dữ liệu
+                string f_password = GetMD5(password);
+
+                // Khai báo biến islogin bên ngoài khối if để có thể sử dụng trong toàn bộ phương thức
+                Nguoidung islogin = null;
+
+                // Truy vấn cơ sở dữ liệu
+                islogin = db.Nguoidungs
+                    .FirstOrDefault(x => x.Email.Equals(userMail, StringComparison.OrdinalIgnoreCase) && x.Matkhau.Equals(f_password));
+
+                // Kiểm tra kết quả của truy vấn
                 if (islogin != null)
                 {
+                    // Lưu thông tin đăng nhập vào Session
                     Session["use"] = islogin;
-                    //Kiểm tra nếu là admin
+
+                    // Kiểm tra xem có phải tài khoản admin không
                     if (userMail == "admin@gmail.com" || userMail == "admin2@gmail.com")
                     {
                         return RedirectToAction("Index", "Admin/Home");
                     }
-                    else
-                    {
-                        return RedirectToAction("Index", "Home");
-                    }
+
+                    // Điều hướng người dùng bình thường về trang chủ
+                    return RedirectToAction("Index", "Home");
                 }
-                else
-                {
-                    ViewBag.Chophep = false;
-                    ViewBag.Fail = "Đăng nhập thất bại: Tài khoản và mật khẩu của bạn không chính xác xin vui lòng thử lại!";
-                    return View(model);
-                }
+
+                // Nếu không đăng nhập thành công
+                ViewBag.Chophep = false;
+                ViewBag.Fail = "Đăng nhập thất bại: Tài khoản và mật khẩu của bạn không chính xác, vui lòng thử lại!";
+                return View(model);
             }
+
+            // Trường hợp ModelState không hợp lệ
             return View(model);
         }
+
 
         public ActionResult DangXuat()
         {
@@ -228,7 +240,7 @@ namespace Website_ban_quan_ao.Controllers
             }
             else if (user.Dienthoai.Length != 10 || !user.Dienthoai.All(char.IsDigit))
             {
-                ModelState.AddModelError("Dienthoai", "Số điện thoại phải có đúng 10 chữ số.");
+                ModelState.AddModelError("Dienthoai", "Số điện thoại phải có đúng 10 chữ số và không có kí tự,dấu,chữ cái .");
             }
             else if (!user.Dienthoai.StartsWith("0"))
             {
@@ -267,7 +279,6 @@ namespace Website_ban_quan_ao.Controllers
             // Nếu có lỗi, trả về view cùng với các thông báo lỗi
             return View(user);
         }
-
 
         public ActionResult Donhang()
         {
@@ -344,11 +355,11 @@ namespace Website_ban_quan_ao.Controllers
             // Order and include related entities
             var ctDonhangs = ctDonhangsQuery
                              .OrderBy(x => x.Madon)
-                             .Include(x => x.Donhang)
+                             .Include(x => x.Sanpham)
                              .ToList();
 
             // Extract the products from the loaded Chitietdonhangs
-            var products = ctDonhangs.Select(ct => ct.Donhang).Where(sp => sp != null).ToList();
+            var products = ctDonhangs.Select(ct => ct.Sanpham).Where(sp => sp != null).ToList();
 
             ViewBag.SanPham = products;
             return View(ctDonhangs);

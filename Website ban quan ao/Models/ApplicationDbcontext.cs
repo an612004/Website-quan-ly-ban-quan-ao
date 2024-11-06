@@ -18,6 +18,7 @@ namespace Website_ban_quan_ao.Models
         public DbSet<Nguoidung> Nguoidungs { get; set; }
         public DbSet<Phanquyen> Phanquyens { get; set; }
         public DbSet<Sanpham> Sanphams { get; set; }
+        public DbSet<TinTuc> TinTuc { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

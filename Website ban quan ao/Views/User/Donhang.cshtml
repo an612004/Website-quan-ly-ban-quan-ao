@@ -16,7 +16,7 @@
             }
             else
             {
-                <table class="table table-bordered table-hover">
+                <table class="table table-bordered table-hover divDanhSachDonHang">
                     <thead>
                         <tr>
                             <th>Mã đơn hàng</th>
@@ -39,27 +39,17 @@
                                     var user = users.FirstOrDefault(pq => pq.Manguoidung == order.Manguoidung);
                                     if (user != null)
                                     {
-                                        <td>
-
-                                            @user.Hoten
-                                        </td>
-                                        <td>
-                                            @user.Diachi
-                                        </td>
+                                        <td>@user.Hoten</td>
+                                        <td>@user.Diachi</td>
                                     }
                                     else
                                     {
-                                        <td>
-                                            Không có tên người dùng
-                                        </td>
-                                        <td>
-
-                                            Không có địa chỉ
-                                        </td>
+                                        <td>Không có tên người dùng</td>
+                                        <td>Không có địa chỉ</td>
                                     }
                                 }
                                 <td>@order.Ngaydat</td>
-                                <td>@order.GiaTien</td>
+                                <td>@String.Format("{0:0,0}", order.GiaTien) VNĐ</td>
                                 <td>
                                     @{
                                         string tinhtrang = "";
@@ -90,19 +80,16 @@
                                         <form action="@Url.Action("Nhanhang", "User", new { id = order.Madon })" method="post">
                                             <button type="submit" class="btn btn-success btn-sm">Đã nhận hàng</button>
                                         </form>
-
                                     }
                                     @if (order.Tinhtrang == 1)
                                     {
                                         <form action="@Url.Action("Huydon", "User", new { id = order.Madon })" method="post">
-                                            <button type="submit" class="btn btn-success btn-sm">Hủy đơn</button>
+                                            <button type="submit" class="btn btn-danger btn-sm">Hủy đơn</button>
                                         </form>
-
                                     }
                                 </td>
                                 <td>
                                     <a href="@Url.Action("Detaildonhang", "User", new { Madon = order.Madon })" class="btn btn-sm btn-primary">Chi tiết</a>
-
                                 </td>
                             </tr>
                         }
@@ -117,8 +104,18 @@
 </div>
 
 <style>
+    .divDanhSachDonHang {
+        border: 2px solid #EEEEEE;
+        margin: 20px 0;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        background-color: #f9f9f9;
+        border-radius: 8px;
+    }
+
     .table th, .table td {
         font-size: 1.2rem; /* Tăng kích thước chữ */
+        padding: 15px;
+        text-align: center;
     }
 
     .btn-lg {
@@ -128,5 +125,13 @@
 
     .text-center {
         margin-top: 20px;
+    }
+
+    .btn-danger {
+        margin-left: 5px; /* Giãn cách giữa các nút */
+    }
+
+    .table-hover tbody tr:hover {
+        background-color: #e3f2fd; /* Hiệu ứng hover cho bảng */
     }
 </style>

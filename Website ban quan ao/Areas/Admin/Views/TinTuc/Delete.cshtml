@@ -1,0 +1,52 @@
+﻿@model Website_ban_quan_ao.Models.TinTuc
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Xóa Bài Viết</h2>
+
+<div class="alert alert-warning">
+    Bạn có chắc chắn muốn xóa bài viết "<strong>@Model.TieuDe</strong>" không?
+</div>
+
+<div>
+    <dl class="dl-horizontal">
+        <dt>Tiêu Đề:</dt>
+        <dd>@Model.TieuDe</dd>
+
+        <dt>Nội Dung:</dt>
+        <dd>@Html.DisplayFor(model => model.NoiDung)</dd>
+
+        <dt>Hình Ảnh:</dt>
+        <td>
+            <img src="@Url.Content("~/Hinhanh/" + Model.Anhbia)" class="product-image" />
+        </td>
+
+        <dt>Ngày Tạo:</dt>
+        <dd>@Model.NgayTao.ToString("dd/MM/yyyy")</dd>
+
+        <dt>Trạng Thái:</dt>
+        <dd>
+            @if (Model.TrangThai)
+            {
+                <span class="badge badge-success">Hiển thị</span>
+            }
+            else
+            {
+                <span class="badge badge-secondary">Ẩn</span>
+            }
+        </dd>
+    </dl>
+</div>
+
+@using (Html.BeginForm("Delete", "TinTuc", new { area = "Admin", id = Model.Id }, FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        <input type="submit" value="Xóa" class="btn btn-danger" />
+        <a href="@Url.Action("Index", "TinTuc", new { area = "Admin" })" class="btn btn-secondary">Hủy</a>
+    </div>
+}

@@ -1,0 +1,46 @@
+﻿@model Website_ban_quan_ao.Models.TinTuc
+
+@{
+    ViewBag.Title = "Chi Tiết Bài Viết";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Chi Tiết Bài Viết</h2>
+
+<div>
+    <h4>@Model.TieuDe</h4>
+    <hr />
+
+    <div>
+        <strong>Nội Dung:</strong>
+        <p>@Html.DisplayFor(model => model.NoiDung)</p>
+    </div>
+
+    <td>
+        <img src="@Url.Content("~/Hinhanh/" + Model.Anhbia)" class="product-image" />
+    </td>
+
+    <div>
+        <strong>Ngày Tạo:</strong>
+        <p>@Model.NgayTao.ToString("dd/MM/yyyy")</p>
+    </div>
+
+    <div>
+        <strong>Trạng Thái:</strong>
+        <p>
+            @if (Model.TrangThai)
+            {
+                <span class="badge badge-success">Hiển thị</span>
+            }
+            else
+            {
+                <span class="badge badge-secondary">Ẩn</span>
+            }
+        </p>
+    </div>
+
+    <div>
+        <a href="@Url.Action("Edit", "TinTuc", new { area = "Admin", id = Model.Id })" class="btn btn-warning">Sửa</a>
+        <a href="@Url.Action("Index", "TinTuc", new { area = "Admin" })" class="btn btn-secondary">Quay lại danh sách</a>
+    </div>
+</div>

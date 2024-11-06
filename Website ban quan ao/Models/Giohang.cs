@@ -22,13 +22,13 @@ namespace Website_ban_quan_ao.Models
         // Hàm tạo cho giỏ hàng
         public GioHang(int Masp, string size)
         {
-            //iMasp = Masp;
-            //Size = size; // Khởi tạo size từ đối số truyền vào
-            ////Sanpham sp = db.Sanphams.Single(n => n.Masp == iMasp);
-            //sTensp = sp.Tensp;
-            //sAnhBia = sp.Anhbia;
-            //dDonGia = double.Parse(sp.Giatien.ToString());
-            //iSoLuong = 1;
+            iMasp = Masp;
+            Size = size; // Khởi tạo size từ đối số truyền vào
+            Sanpham sp = db.Sanphams.Single(n => n.Masp == iMasp);
+            sTensp = sp.Tensp;
+            sAnhBia = sp.Anhbia;
+            dDonGia = double.Parse(sp.Giatien.ToString());
+            iSoLuong = 1;
         }
     }
 }

@@ -51,7 +51,7 @@
         .ss_img img {
             width: 100%;
             border-radius: 10px;
-            object-fit: cover; /* Đảm bảo ảnh không bị méo */
+            object-fit: cover;
         }
 
         /* Style cho phần slideshow */
@@ -59,25 +59,63 @@
             max-width: 1200px;
             position: relative;
             margin: 0 auto;
-            overflow: hidden; /* Ẩn ảnh vượt ra ngoài khung */
+            overflow: hidden;
         }
 
         .slideshow-wrapper {
             display: flex;
-            width: 300%; /* Nếu có 3 ảnh, width cần bằng 3 lần width của slideshow-container */
-            transition: transform 1s ease; /* Hiệu ứng chuyển động mượt mà */
+            width: 300%;
+            transition: transform 1s ease;
         }
 
         .slide {
-            flex: 1 0 100%; /* Mỗi ảnh chiếm toàn bộ khung */
+            flex: 1 0 100%;
             box-sizing: border-box;
         }
 
             .slide img {
                 width: 35%;
-                height: 400px; /* Thay đổi kích thước theo ý muốn */
-                object-fit: cover; /* Đảm bảo ảnh không bị méo */
+                height: 400px;
+                object-fit: cover;
                 border-radius: 10px;
+            }
+
+        /* Style cho popup quảng cáo */
+        .popup {
+            display: none; /* Ban đầu ẩn popup */
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 900px; /* Điều chỉnh kích thước theo ý bạn */
+            background-color: white;
+            border: 2px solid #000;
+            box-shadow: 0px 0px 15px rgba(0,0,0,0.5);
+            z-index: 1000;
+            padding: 10px;
+            text-align: center;
+            border-radius: 8px;
+        }
+
+            .popup img {
+                width: 100%;
+                height: auto;
+                border-radius: 5px;
+            }
+
+        #close-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: #333;
+        }
+
+            #close-btn:hover {
+                color: red;
             }
     </style>
 </head>
@@ -93,7 +131,7 @@
                 <img src="~/Hinhanh/dung-luong-banner-thoi-trang.jpg" alt="Marvel 1">
             </div>
             <div class="slide">
-                <img src="~/Hinhanh//ảnh chuyển 12.png" alt="Shirts Dress Fashion">
+                <img src="~/Hinhanh/ảnh chuyển 12.png" alt="Shirts Dress Fashion">
             </div>
             <div class="slide">
                 <img src="~/Hinhanh/ảnh chuyển 13.jpeg" alt="Shirts Dress Fashion">
@@ -107,7 +145,26 @@
         </div>
     </div>
 
+    <!-- Popup Quảng Cáo -->
+    <div id="ad-popup" class="popup">
+        <img src="~/Hinhanh/quảng cáo 2.jpg" alt="Tưng Bừng Khai Trương">
+        <button id="close-btn">&times;</button>
+    </div>
+
     <script>
+        // Hiển thị popup sau 3 giây khi vào trang
+        document.addEventListener('DOMContentLoaded', function () {
+            setTimeout(function () {
+                document.getElementById('ad-popup').style.display = 'block';
+            }, 2000);
+
+            // Đóng popup khi nhấn nút "×"
+            document.getElementById('close-btn').addEventListener('click', function () {
+                document.getElementById('ad-popup').style.display = 'none';
+            });
+        });
+
+        // Slideshow script
         let currentIndex = 0;
         const slides = document.querySelectorAll('.slide');
         const slideshowWrapper = document.querySelector('.slideshow-wrapper');
@@ -210,7 +267,7 @@
     </div>
 </section>
 
-<
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -244,16 +301,19 @@
         }
 
         .image-slider {
-            display: inline-flex;
+            display: flex;
+            justify-content: center; /* Căn giữa ảnh theo chiều ngang */
+            align-items: center; /* Căn giữa ảnh theo chiều dọc */
+            padding: 20px; /* Thêm khoảng đệm để ảnh trông thoáng hơn */
         }
 
             .image-slider img {
-                width: 600px;
-                height: auto;
-                max-width: 100%;
-                margin-right: 10px;
-                border: 3px solid #100f12; /* Tạo đường viền cho ảnh */
-                border-radius: 5px; /* Bo tròn góc của viền */
+                width: 200%; /* Kéo dài ảnh theo chiều rộng của container */
+                max-width: 1200px; /* Đặt giới hạn chiều rộng tối đa để không quá lớn */
+                height: auto; /* Giữ tỷ lệ gốc của ảnh */
+                max-height: 700px; /* Đặt chiều cao tối đa nếu cần */
+                object-fit: cover; /* Giúp ảnh không bị méo */
+                border-radius: 8px; /* Bo góc nhẹ */
             }
 
         .arrow {
@@ -283,14 +343,48 @@
         <div class="slider-container">
             <div class="image-slider">
                 @*<img src="~/Hinhanh/ảnh chuyển 1.jpg" class="img-responsive" alt="Ảnh 1" />
-                <img src="~/Hinhanh/tải xuống (1).jpg" class="img-responsive" alt="Ảnh 2" />*@
+                    <img src="~/Hinhanh/tải xuống (1).jpg" class="img-responsive" alt="Ảnh 2" />*@
                 <div class="dt">
-                    @Html.Action("AoThunPolo", "Sanpham")
+                    <div class="image-slider">
+                        <img src="~/Hinhanh/sheowsvi.png" class="img-responsive" alt="Ảnh 2" />
+</body>
+    </div>
+@Html.Action("AoThunPolo", "Sanpham")
+@Html.Action("AoThunTayNgan", "Sanpham")
+<div class="image-slider">
+    <img src="~/Hinhanh/zn9hz2qw.png" class="img-responsive" alt="Ảnh 2" />
+    </body>
+</div>
+@Html.Action("QuanJean", "Sanpham")
+@Html.Action("QuanShortKaki", "Sanpham")
                 </div>
-                @*<img src="~/Hinhanh/ảnh chuyển 1.jpg" class="img-responsive" alt="Ảnh 4" />
-                <img src="~/Hinhanh/ảnh chuyển 1.jpg" class="img-responsive" alt="Ảnh 5" />*@
+
             </div>
         </div>
     </div>
 </body>
+<body>
+    <div class="spnoibat">
+        <div class="slider-container">
+            <div class="image-slider">
+                <div class="danhmuc" style="margin-bottom: 50px; display: inline-block; margin-right: 40px;">
+                    @Html.Action("DanhmucPartial", "Danhmuc")
+                </div>
+                @*<div class="dt">
+                        @Html.Action("Brioni", "Sanpham")
+                    </div>*@
+                @*<div class="dt">
+                        @Html.Action("Calvin", "Sanpham")
+                    </div>
+                    <div class="dt">
+                        @Html.Action("Gucci", "Sanpham")*@
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="image-slider">
+        <img src="~/Hinhanh/ảnh quảng cáo.png" class="img-responsive" alt="Ảnh 2" />
+</body>
+    </div>
+
 </html>

@@ -1,66 +1,122 @@
 ﻿@model Website_ban_quan_ao.Models.Nguoidung
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Chi tiết người dùng";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>Chi tiết người dùng</h2>
-
-<div>
-
+<div class="user-details-container">
+    <h2 class="title">Chi tiết người dùng</h2>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Hoten)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Hoten)
-        </dd>
+    <div class="details-grid">
+        <div class="details-item">
+            <strong>@Html.DisplayNameFor(model => model.Hoten)</strong>
+            <span>@Html.DisplayFor(model => model.Hoten)</span>
+        </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
+        <div class="details-item">
+            <strong>@Html.DisplayNameFor(model => model.Email)</strong>
+            <span>@Html.DisplayFor(model => model.Email)</span>
+        </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
+        <div class="details-item">
+            <strong>@Html.DisplayNameFor(model => model.Dienthoai)</strong>
+            <span>@Html.DisplayFor(model => model.Dienthoai)</span>
+        </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Dienthoai)
-        </dt>
+        <div class="details-item">
+            <strong>@Html.DisplayNameFor(model => model.Matkhau)</strong>
+            <span>@Html.DisplayFor(model => model.Matkhau)</span>
+        </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Dienthoai)
-        </dd>
+        <div class="details-item">
+            <strong>Phân Quyền</strong>
+            <span>@ViewBag.Quyen.TenQuyen</span>
+        </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Matkhau)
-        </dt>
+        <div class="details-item">
+            <strong>@Html.DisplayNameFor(model => model.Diachi)</strong>
+            <span>@Html.DisplayFor(model => model.Diachi)</span>
+        </div>
+    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Matkhau)
-        </dd>
-
-        <dt>
-            Phan Quyen
-        </dt>
-
-        <dd>
-            @ViewBag.Quyen.TenQuyen
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Diachi)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Diachi)
-        </dd>
-    </dl>
+    <div class="action-buttons">
+        @Html.ActionLink("Sửa", "Edit", new { id = Model.Manguoidung }, new { @class = "btn btn-warning btn-custom" }) |
+        @Html.ActionLink("Quay lại danh sách", "Index", null, new { @class = "btn btn-primary btn-custom" })
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Manguoidung }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+<!-- CSS -->
+<style>
+    .title {
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 28px;
+        color: #333;
+        font-weight: bold;
+    }
+
+    .user-details-container {
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        max-width: 800px;
+        margin: 20px auto;
+    }
+
+    .details-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+
+    .details-item {
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        background-color: #fff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+        .details-item strong {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+    .action-buttons {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .btn-custom {
+        padding: 10px 20px;
+        font-size: 16px;
+        font-weight: 500;
+        border-radius: 5px;
+        text-decoration: none;
+    }
+
+    .btn-warning {
+        background-color: #ffc107;
+        border-color: #ffc107;
+        color: #fff;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+        color: #fff;
+    }
+
+    .btn-warning:hover {
+        background-color: #e0a800;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+</style>

@@ -1,9 +1,11 @@
 ﻿using PagedList;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
-using System.Web;
+using System.Net;
 using System.Web.Mvc;
+//using Website_ban_quan_ao.Models;
 using Website_ban_quan_ao.Models;
 
 namespace Website_ban_quan_ao.Areas.Admin.Controllers

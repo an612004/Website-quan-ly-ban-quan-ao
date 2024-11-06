@@ -129,7 +129,7 @@
 
     .product-card {
         position: relative;
-        overflow: hidden; /* Đảm bảo các phần tử con không bị tràn */
+        overflow: hidden;
     }
 
     .sale-badge {
@@ -159,7 +159,7 @@
 
 <div class="header">
     <h3 class="brand-title">Nón</h3>
-    <a href="@Url.Action("Index", "Home")" class="btn btn-back">Quay lại trang chủ</a> <!-- Nút quay lại -->
+    <a href="@Url.Action("Index", "Home")" class="btn btn-back">Quay lại trang chủ</a>
 </div>
 
 <div class="products-container">
@@ -205,18 +205,10 @@
                     <option value="">Chọn size</option>
                     <option value="36">36</option>
                     <option value="37">37</option>
-                    <option value="38">38</option>
-                    <option value="39">39</option>
-                    <option value="40">40</option>
-                    <option value="41">41</option>
-                    <option value="42">42</option>
-                    <option value="43">43</option>
-                    <option value="44">44</option>
-                    <option value="45">45</option>
                 </select>
                 <br /><br />
                 <input type="number" name="quantity" value="1" min="1" style="width: 60px;" required>
-                <input type="submit" value="Thêm vào giỏ hàng" class="btn btn-primary" onclick="addToCart('@item.Tensp')" />
+                <input type="submit" value="Thêm vào giỏ hàng" class="btn btn-primary" onclick="addToCart('@item.Tensp', '@item.Masp')" />
             }
         </div>
     }
@@ -225,11 +217,10 @@
 <div class="cart-notification" id="cart-notification">
     Sản phẩm đã được thêm vào giỏ hàng!
 </div>
+
 <script>
-    // Lấy tất cả các sản phẩm hiện có trong danh sách
     var allProducts = document.querySelectorAll('.product-card');
 
-    // Hàm xử lý tìm kiếm
     function searchProducts() {
         var searchQuery = document.getElementById("searchInput1").value.toLowerCase();
         var minPrice = parseFloat(document.getElementById("minPrice1").value);
@@ -240,37 +231,34 @@
             var productPrice = parseFloat(product.querySelector('h3').nextElementSibling.innerText.replace('Giá: ', '').replace(' đ', ''));
 
             if (productName.indexOf(searchQuery) === -1 || (minPrice && productPrice < minPrice) || (maxPrice && productPrice > maxPrice)) {
-                product.style.display = 'none';
+                product.style.display = "none";
             } else {
-                product.style.display = 'block';
+                product.style.display = "block";
             }
         });
     }
 
-    function resetSearchFields() {
-        document.getElementById("searchInput1").value = '';
-        document.getElementById("minPrice1").value = '';
-        document.getElementById("maxPrice1").value = '';
-        searchProducts();
-    }
-
-    document.getElementById('searchButton1').addEventListener('click', function () {
-        searchProducts();
+    document.getElementById("resetButton").addEventListener("click", function () {
+        document.getElementById("searchInput1").value = "";
+        document.getElementById("minPrice1").value = "";
+        document.getElementById("maxPrice1").value = "";
+        allProducts.forEach(function (product) {
+            product.style.display = "block";
+        });
     });
 
-    document.getElementById('resetButton').addEventListener('click', function () {
-        resetSearchFields();
-    });
-
-    document.addEventListener('keypress', function (e) {
-        if (e.key === 'Enter') {
-            e.preventDefault();
-            searchProducts();
-        }
-    });
-
-    function addToCart(productName) {
+    function addToCart(productName, productId) {
         event.preventDefault();
+
+        // Lấy giá trị của select size
+        var sizeSelect = document.getElementById('size-' + productId);
+        var selectedSize = sizeSelect.value;
+
+        if (selectedSize === "") {
+            alert("Vui lòng chọn size trước khi thêm vào giỏ hàng!");
+            return; // Không gửi form nếu chưa chọn size
+        }
+
         var notification = document.getElementById('cart-notification');
         notification.textContent = productName + " đã được thêm vào giỏ hàng!";
         notification.style.display = 'block';
@@ -278,5 +266,7 @@
             notification.style.display = 'none';
         }, 3000);
 
+        // Gửi form sau khi kiểm tra size
         event.target.closest('form').submit();
-    }</script>
+    }
+</script>
