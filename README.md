@@ -32,5 +32,5 @@
 ## Chú Thích
 - Kết nối cơ sở dữ liệu theo dạng Code First. Tải xuống và thay đổi đường dẫn trong `Web.Config` để chạy.
 - Đây là website quản lý cửa hàng bán quần áo (chủ yếu dành cho nam).
-- Dự án này được thực hiện và quản lý bởi **Nhóm 8**.
+- Dự án này được thực hiện và quản lý bởi **Ho Binh An**.
 - Góp ý xin liên hệ: [hobinhan321@gmail.com](mailto:hobinhan321@gmail.com).
